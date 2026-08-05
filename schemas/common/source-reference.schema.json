@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://crgs.dev/schema/common/source-reference.schema.json",
+  "title": "SourceReference",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "citation": {
+      "type": "string",
+      "minLength": 1
+    },
+    "locator": {
+      "type": "string"
+    },
+    "url": {
+      "type": "string",
+      "format": "uri"
+    }
+  },
+  "required": ["title", "citation"],
+  "additionalProperties": false
+}

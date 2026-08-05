@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://crgs.dev/schema/entities/entity.schema.json",
+  "title": "Entity",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._:-]*$"
+    },
+    "type": {
+      "type": "string",
+      "minLength": 1
+    },
+    "label": {
+      "$ref": "https://crgs.dev/schema/common/localized-text.schema.json"
+    },
+    "source": {
+      "$ref": "https://crgs.dev/schema/common/source-reference.schema.json"
+    },
+    "requirements": {
+      "$ref": "https://crgs.dev/schema/requirements/requirement-expression.schema.json"
+    },
+    "effects": {
+      "type": "array",
+      "items": {
+        "$ref": "https://crgs.dev/schema/effects/effect.schema.json"
+      }
+    },
+    "metadata": {
+      "$ref": "https://crgs.dev/schema/common/metadata.schema.json"
+    }
+  },
+  "required": ["id", "type", "label"],
+  "additionalProperties": false
+}

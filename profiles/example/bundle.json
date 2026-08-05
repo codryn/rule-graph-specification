@@ -1,0 +1,58 @@
+{
+  "specVersion": "0.1.0",
+  "manifest": {
+    "id": "example-rpg.profile-demo",
+    "title": "Example RPG Profile Demonstration Bundle",
+    "datasetVersion": "0.1.0",
+    "description": "A profile-scoped demonstration bundle used to verify CRGS architecture."
+  },
+  "profile": {
+    "id": "example-rpg",
+    "name": "Example RPG",
+    "version": "0.1.0",
+    "specVersion": "0.1.0",
+    "extensions": {
+      "entityTypes": ["trait", "selection"],
+      "requirementTypes": ["fact", "group"],
+      "effectTypes": ["grant", "increase"],
+      "relationshipTypes": ["grants", "depends-on"]
+    }
+  },
+  "entities": [
+    {
+      "id": "selection.origin",
+      "type": "selection",
+      "label": {
+        "default": "Origin Selection"
+      }
+    },
+    {
+      "id": "trait.brave",
+      "type": "trait",
+      "label": {
+        "default": "Brave"
+      },
+      "requirements": {
+        "kind": "fact",
+        "fact": "selected:origin",
+        "operator": "present"
+      },
+      "effects": [
+        {
+          "type": "grant",
+          "target": "capability.advantage.fear",
+          "operation": "grant",
+          "value": true
+        }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "id": "rel.origin-grants-brave",
+      "type": "grants",
+      "from": "selection.origin",
+      "to": "trait.brave"
+    }
+  ]
+}

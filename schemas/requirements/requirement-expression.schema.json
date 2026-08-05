@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://crgs.dev/schema/requirements/requirement-expression.schema.json",
+  "title": "RequirementExpression",
+  "$defs": {
+    "fact": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "fact"
+            },
+            "fact": {
+              "type": "string",
+              "minLength": 1
+            },
+            "operator": {
+              "const": "present"
+            }
+          },
+          "required": ["kind", "fact", "operator"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "const": "fact"
+            },
+            "fact": {
+              "type": "string",
+              "minLength": 1
+            },
+            "operator": {
+              "enum": ["equals", "atLeast"]
+            },
+            "value": {
+              "type": ["string", "number", "integer", "boolean"]
+            }
+          },
+          "required": ["kind", "fact", "operator", "value"],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "group": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "const": "group"
+        },
+        "mode": {
+          "enum": ["all", "any", "none"]
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "$ref": "#"
+          },
+          "minItems": 1
+        }
+      },
+      "required": ["kind", "mode", "children"],
+      "additionalProperties": false
+    }
+  },
+  "oneOf": [
+    {
+      "$ref": "#/$defs/fact"
+    },
+    {
+      "$ref": "#/$defs/group"
+    }
+  ]
+}

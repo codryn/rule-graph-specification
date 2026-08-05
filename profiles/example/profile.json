@@ -1,0 +1,13 @@
+{
+  "id": "example-rpg",
+  "name": "Example RPG",
+  "version": "0.1.0",
+  "specVersion": "0.1.0",
+  "description": "A minimal demonstration profile used to verify CRGS repository architecture.",
+  "extensions": {
+    "entityTypes": ["trait", "selection"],
+    "requirementTypes": ["fact", "group"],
+    "effectTypes": ["grant", "increase"],
+    "relationshipTypes": ["grants", "depends-on"]
+  }
+}

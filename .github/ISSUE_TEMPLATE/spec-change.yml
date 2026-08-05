@@ -1,0 +1,35 @@
+name: Specification Change
+description: Propose a normative or editorial change to the CRGS specification.
+title: "spec: "
+labels:
+  - specification
+body:
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Change Type
+      options:
+        - Editorial clarification
+        - Backward-compatible addition
+        - Breaking semantic change
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem Statement
+      description: Explain the ambiguity, interoperability issue, or missing capability.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed Change
+      description: Describe the intended specification, schema, and example updates.
+    validations:
+      required: true
+  - type: textarea
+    id: compatibility
+    attributes:
+      label: Compatibility Notes
+      description: Explain migration impact on existing profiles or datasets.

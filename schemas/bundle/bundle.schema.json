@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://crgs.dev/schema/bundle/bundle.schema.json",
+  "title": "Bundle",
+  "type": "object",
+  "properties": {
+    "specVersion": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "manifest": {
+      "$ref": "https://crgs.dev/schema/bundle/manifest.schema.json"
+    },
+    "profile": {
+      "$ref": "https://crgs.dev/schema/profile/profile.schema.json"
+    },
+    "entities": {
+      "type": "array",
+      "items": {
+        "$ref": "https://crgs.dev/schema/entities/entity.schema.json"
+      }
+    },
+    "relationships": {
+      "type": "array",
+      "items": {
+        "$ref": "https://crgs.dev/schema/relations/relationship.schema.json"
+      }
+    },
+    "metadata": {
+      "$ref": "https://crgs.dev/schema/common/metadata.schema.json"
+    }
+  },
+  "required": [
+    "specVersion",
+    "manifest",
+    "profile",
+    "entities",
+    "relationships"
+  ],
+  "additionalProperties": false
+}

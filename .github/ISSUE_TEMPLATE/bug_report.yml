@@ -1,0 +1,25 @@
+name: Bug Report
+description: Report a defect in schemas, tooling, or repository automation.
+title: "bug: "
+labels:
+  - bug
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: Describe the observed behavior and why it is incorrect.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: Include commands, files, or example data needed to reproduce the problem.
+    validations:
+      required: true
+  - type: textarea
+    id: impact
+    attributes:
+      label: Impact
+      description: State whether this affects specification semantics, schemas, examples, tooling, or CI.

@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://crgs.dev/schema/effects/effect.schema.json",
+  "title": "Effect",
+  "oneOf": [
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "target": {
+          "type": "string",
+          "minLength": 1
+        },
+        "operation": {
+          "enum": ["set", "increase", "decrease", "grant"]
+        },
+        "value": {
+          "type": ["string", "number", "integer", "boolean"]
+        }
+      },
+      "required": ["type", "target", "operation", "value"],
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "target": {
+          "type": "string",
+          "minLength": 1
+        },
+        "operation": {
+          "enum": ["set", "increase", "decrease", "grant"]
+        },
+        "formula": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": ["type", "target", "operation", "formula"],
+      "additionalProperties": false
+    }
+  ]
+}

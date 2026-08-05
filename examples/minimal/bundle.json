@@ -1,0 +1,65 @@
+{
+  "specVersion": "0.1.0",
+  "manifest": {
+    "id": "example-rpg.minimal",
+    "title": "Example RPG Minimal Bundle",
+    "datasetVersion": "0.1.0",
+    "description": "A tiny demonstration bundle for CRGS validation."
+  },
+  "profile": {
+    "id": "example-rpg",
+    "name": "Example RPG",
+    "version": "0.1.0",
+    "specVersion": "0.1.0",
+    "extensions": {
+      "entityTypes": ["trait", "selection"],
+      "requirementTypes": ["fact", "group"],
+      "effectTypes": ["grant", "increase"],
+      "relationshipTypes": ["grants", "depends-on"]
+    }
+  },
+  "entities": [
+    {
+      "id": "ancestry.human",
+      "type": "trait",
+      "label": {
+        "default": "Human"
+      },
+      "metadata": {
+        "tags": ["example", "ancestry"]
+      }
+    },
+    {
+      "id": "feature.adaptable",
+      "type": "trait",
+      "label": {
+        "default": "Adaptable"
+      },
+      "requirements": {
+        "kind": "fact",
+        "fact": "selected:ancestry",
+        "operator": "equals",
+        "value": "ancestry.human"
+      },
+      "effects": [
+        {
+          "type": "grant",
+          "target": "capability.extra-choice",
+          "operation": "grant",
+          "value": true
+        }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "id": "rel.human-grants-adaptable",
+      "type": "grants",
+      "from": "ancestry.human",
+      "to": "feature.adaptable"
+    }
+  ],
+  "metadata": {
+    "tags": ["example", "minimal"]
+  }
+}

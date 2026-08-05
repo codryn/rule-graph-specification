@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: CRGS Design Discussions
+    url: https://github.com/codryn/rule-graph-specification/discussions/categories/spec-design
+    about: Use discussions for open-ended design exploration before turning a proposal into a tracked specification change.
+  - name: CRGS Tooling Discussions
+    url: https://github.com/codryn/rule-graph-specification/discussions/categories/tooling
+    about: Use discussions for validator, packaging, and repository workflow ideas.

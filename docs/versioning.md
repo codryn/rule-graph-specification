@@ -1,0 +1,37 @@
+# Versioning
+
+## Version Domains
+
+CRGS distinguishes three independent version domains.
+
+### Specification Version
+
+The version of the CRGS core specification, including normative semantics and core schemas.
+
+### Profile Version
+
+The version of a profile that extends CRGS. A profile declares the CRGS specification version it targets.
+
+### Dataset Version
+
+The version of a concrete bundle or dataset produced under a profile.
+
+## Semantic Versioning
+
+All three domains use Semantic Versioning.
+
+- Major versions indicate incompatible changes.
+- Minor versions indicate backward-compatible additions or clarifications.
+- Patch versions indicate compatible fixes, editorial corrections, or non-semantic maintenance.
+
+## Compatibility Rules
+
+1. A profile must declare the CRGS specification version it targets.
+2. A dataset must declare the profile it uses and its own dataset version.
+3. A profile may tighten validation for its own extension vocabulary, but it must not redefine core semantics.
+4. Minor CRGS releases should preserve compatibility for existing valid core documents unless a major version bump is made.
+5. Dataset migration rules are profile-specific and may require explicit conversion tooling.
+
+## Release Discipline
+
+Normative changes should update the specification version and any affected schema identifiers or package versions as appropriate. Editorial-only changes may remain within the same released specification version until the next formal publication.
