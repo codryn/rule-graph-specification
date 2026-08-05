@@ -40,9 +40,7 @@ export interface CustomRequirementExpression {
 }
 
 export type RequirementExpression =
-  | FactRequirement
-  | GroupRequirement
-  | CustomRequirementExpression;
+  FactRequirement | GroupRequirement | CustomRequirementExpression;
 
 export type Effect =
   | {
@@ -156,10 +154,9 @@ export interface EvaluationContext {
   >;
 }
 
-export type RequirementEvaluator<TExpression extends CustomRequirementExpression> = (
-  expression: TExpression,
-  context: EvaluationContext
-) => EvaluationResult;
+export type RequirementEvaluator<
+  TExpression extends CustomRequirementExpression
+> = (expression: TExpression, context: EvaluationContext) => EvaluationResult;
 
 export type ResolverIssueCode =
   | "DUPLICATE_ENTITY_ID"
@@ -360,10 +357,9 @@ function evaluateFactRequirement(
       ? actualValue !== undefined
       : expression.operator === "equals"
         ? actualValue === expression.value
-        :
-      typeof actualValue === "number" &&
-      typeof expression.value === "number" &&
-      actualValue >= expression.value;
+        : typeof actualValue === "number" &&
+          typeof expression.value === "number" &&
+          actualValue >= expression.value;
 
   return {
     satisfied,
@@ -385,7 +381,9 @@ function evaluateFactRequirement(
   };
 }
 
-function isFactRequirement(expression: RequirementExpression): expression is FactRequirement {
+function isFactRequirement(
+  expression: RequirementExpression
+): expression is FactRequirement {
   return expression.kind === "fact";
 }
 
@@ -399,7 +397,9 @@ function evaluateGroupRequirement(
   expression: GroupRequirement,
   context: EvaluationContext
 ): EvaluationResult {
-  const childResults = expression.children.map((child) => evaluate(child, context));
+  const childResults = expression.children.map((child) =>
+    evaluate(child, context)
+  );
   const childSatisfied = childResults.map((result) => result.satisfied);
 
   const satisfied =
@@ -420,7 +420,8 @@ function evaluateEntityRequirement(
   expression: CustomRequirementExpression,
   context: EvaluationContext
 ): EvaluationResult {
-  const targetId = typeof expression.targetId === "string" ? expression.targetId : undefined;
+  const targetId =
+    typeof expression.targetId === "string" ? expression.targetId : undefined;
   const activeEntityIds = new Set(context.entityIds ?? []);
   const isActive = targetId !== undefined && activeEntityIds.has(targetId);
   const satisfied = Boolean(targetId) && isActive;
@@ -514,7 +515,9 @@ function validateRequirementExpression(
   }
 
   const supportedRequirementKinds = new Set(
-    profile.extensions.requirementTypes?.map((registration) => registration.id) ?? []
+    profile.extensions.requirementTypes?.map(
+      (registration) => registration.id
+    ) ?? []
   );
 
   if (!supportedRequirementKinds.has(kind)) {

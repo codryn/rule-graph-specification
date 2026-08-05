@@ -16,7 +16,8 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const rootDir = resolve(__dirname, "..");
 const schemaDir = join(rootDir, "schemas");
 const conformanceDir = join(rootDir, "conformance");
-const bundleSchemaId = "https://schemas.codryn.com/crgs/v0.1/bundle/bundle.schema.json";
+const bundleSchemaId =
+  "https://schemas.codryn.com/crgs/v0.1/bundle/bundle.schema.json";
 
 interface ConformanceError {
   code: string;
@@ -185,7 +186,10 @@ function mapSchemaErrors(errors: ErrorObject[]): ConformanceError[] {
   return [...uniqueErrors.values()].sort(compareErrors);
 }
 
-function mapResolverIssues(bundle: Bundle, issues: ResolverIssue[]): ConformanceError[] {
+function mapResolverIssues(
+  bundle: Bundle,
+  issues: ResolverIssue[]
+): ConformanceError[] {
   return issues
     .map((issue) => ({
       code: mapResolverIssueCode(issue.code),
@@ -209,7 +213,10 @@ function mapResolverIssueCode(code: ResolverIssue["code"]): string {
   }
 }
 
-function readStringAtJsonPointer(value: unknown, pointer: string): string | undefined {
+function readStringAtJsonPointer(
+  value: unknown,
+  pointer: string
+): string | undefined {
   const segments = pointer
     .split("/")
     .slice(1)
@@ -227,7 +234,10 @@ function readStringAtJsonPointer(value: unknown, pointer: string): string | unde
   return typeof current === "string" ? current : undefined;
 }
 
-function compareErrors(left: ConformanceError, right: ConformanceError): number {
+function compareErrors(
+  left: ConformanceError,
+  right: ConformanceError
+): number {
   return `${left.code}|${left.path}|${left.reference ?? ""}|${left.keyword ?? ""}`.localeCompare(
     `${right.code}|${right.path}|${right.reference ?? ""}|${right.keyword ?? ""}`
   );

@@ -55,6 +55,14 @@ npm run validate
 
 `npm run validate` runs the full local repository check: schema validation, linting, tests, and workspace builds.
 
+The CLI can run the same repository-wide validation pipeline:
+
+```bash
+crgs validate --repo
+```
+
+`crgs validate --repo` and `npm run validate` execute the same underlying repository validation steps.
+
 The conformance suite also has a dedicated entrypoint:
 
 ```bash
@@ -106,11 +114,13 @@ npm unlink -g @codryn/crgs-cli
 The current CLI surface is:
 
 - `crgs validate <path>`
+- `crgs validate --repo`
 - `crgs build <path> --output <file>`
 - `crgs graph <bundle> --output <file>`
 - `crgs evaluate --bundle <bundle> --subject <subject> --target <entity-id>`
 
 `validate` accepts either a CRGS document file or a directory containing `profile.json` and/or `bundle.json`.
+`validate --repo` runs the same full repository validation pipeline as `npm run validate`.
 
 ### End-to-End Example
 

@@ -52,7 +52,9 @@ export function createEmptyRuntimeGraph(): RuntimeGraph {
 
 const entityRequirementKind = "crgs.requirement.entity";
 
-export function buildRuntimeGraph(bundleOrResolved: Bundle | ResolvedBundle): RuntimeGraph {
+export function buildRuntimeGraph(
+  bundleOrResolved: Bundle | ResolvedBundle
+): RuntimeGraph {
   const resolved = isResolvedBundle(bundleOrResolved)
     ? bundleOrResolved
     : resolveBundle(bundleOrResolved);
@@ -60,14 +62,22 @@ export function buildRuntimeGraph(bundleOrResolved: Bundle | ResolvedBundle): Ru
   const nodeById = new Map<string, RuntimeNode>();
   const edgeById = new Map<string, RuntimeEdge>();
 
-  for (const entity of [...resolved.index.byId.values()].sort(compareEntityIds)) {
+  for (const entity of [...resolved.index.byId.values()].sort(
+    compareEntityIds
+  )) {
     nodeById.set(entity.id, {
       id: entity.id,
       kind: "entity",
       entityType: entity.type
     });
 
-    collectRequirementEdges(entity.id, entity.requirements, resolved, nodeById, edgeById);
+    collectRequirementEdges(
+      entity.id,
+      entity.requirements,
+      resolved,
+      nodeById,
+      edgeById
+    );
   }
 
   graph.nodes = [...nodeById.values()].sort(compareNodes);
@@ -77,14 +87,13 @@ export function buildRuntimeGraph(bundleOrResolved: Bundle | ResolvedBundle): Ru
   return graph;
 }
 
-function isResolvedBundle(value: Bundle | ResolvedBundle): value is ResolvedBundle {
+function isResolvedBundle(
+  value: Bundle | ResolvedBundle
+): value is ResolvedBundle {
   return "bundle" in value && "index" in value;
 }
 
-function compareEntityIds(
-  left: { id: string },
-  right: { id: string }
-): number {
+function compareEntityIds(left: { id: string }, right: { id: string }): number {
   return left.id.localeCompare(right.id);
 }
 
@@ -101,7 +110,8 @@ function collectRequirementEdges(
   }
 
   if (isGroupRequirement(expression)) {
-    const shouldIncludeChildren = includeDependencies && expression.mode !== "none";
+    const shouldIncludeChildren =
+      includeDependencies && expression.mode !== "none";
     for (const child of expression.children) {
       collectRequirementEdges(
         ownerId,
@@ -120,12 +130,24 @@ function collectRequirementEdges(
   }
 
   if (isFactRequirement(expression)) {
-    if (expression.operator === "equals" && typeof expression.value === "string") {
+    if (
+      expression.operator === "equals" &&
+      typeof expression.value === "string"
+    ) {
       addEntityDependency(expression.value, ownerId, resolved, edgeById);
     }
 
-    if (expression.operator === "atLeast" && typeof expression.value === "number") {
-      addVirtualThresholdDependency(expression.fact, expression.value, ownerId, nodeById, edgeById);
+    if (
+      expression.operator === "atLeast" &&
+      typeof expression.value === "number"
+    ) {
+      addVirtualThresholdDependency(
+        expression.fact,
+        expression.value,
+        ownerId,
+        nodeById,
+        edgeById
+      );
     }
 
     return;
@@ -136,7 +158,9 @@ function collectRequirementEdges(
   }
 }
 
-function isFactRequirement(expression: RequirementExpression): expression is FactRequirement {
+function isFactRequirement(
+  expression: RequirementExpression
+): expression is FactRequirement {
   return expression.kind === "fact";
 }
 
@@ -149,7 +173,10 @@ function isGroupRequirement(
 function isEntityRequirement(
   expression: RequirementExpression
 ): expression is CustomRequirementExpression & { targetId: string } {
-  return expression.kind === entityRequirementKind && typeof expression.targetId === "string";
+  return (
+    expression.kind === entityRequirementKind &&
+    typeof expression.targetId === "string"
+  );
 }
 
 function addEntityDependency(
@@ -210,7 +237,10 @@ function buildVirtualThresholdNodeId(fact: string, value: number): string {
 }
 
 function sanitizeFactSegment(fact: string): string {
-  return fact.replace(/[^a-zA-Z0-9]+/g, ".").replace(/^\.+|\.+$/g, "").toLowerCase();
+  return fact
+    .replace(/[^a-zA-Z0-9]+/g, ".")
+    .replace(/^\.+|\.+$/g, "")
+    .toLowerCase();
 }
 
 function compareNodes(left: RuntimeNode, right: RuntimeNode): number {
@@ -221,7 +251,10 @@ function compareEdges(left: RuntimeEdge, right: RuntimeEdge): number {
   return left.id.localeCompare(right.id);
 }
 
-function detectCycles(nodes: RuntimeNode[], edges: RuntimeEdge[]): RuntimeCycle[] {
+function detectCycles(
+  nodes: RuntimeNode[],
+  edges: RuntimeEdge[]
+): RuntimeCycle[] {
   const entityNodeIds = new Set(
     nodes.filter((node) => node.kind === "entity").map((node) => node.id)
   );
@@ -272,12 +305,18 @@ function detectCycles(nodes: RuntimeNode[], edges: RuntimeEdge[]): RuntimeCycle[
         visitNode(targetId);
         lowLinkByNode.set(
           nodeId,
-          Math.min(lowLinkByNode.get(nodeId) ?? 0, lowLinkByNode.get(targetId) ?? 0)
+          Math.min(
+            lowLinkByNode.get(nodeId) ?? 0,
+            lowLinkByNode.get(targetId) ?? 0
+          )
         );
       } else if (onStack.has(targetId)) {
         lowLinkByNode.set(
           nodeId,
-          Math.min(lowLinkByNode.get(nodeId) ?? 0, indexByNode.get(targetId) ?? 0)
+          Math.min(
+            lowLinkByNode.get(nodeId) ?? 0,
+            indexByNode.get(targetId) ?? 0
+          )
         );
       }
     }
@@ -305,7 +344,8 @@ function detectCycles(nodes: RuntimeNode[], edges: RuntimeEdge[]): RuntimeCycle[
         nodeIds: component,
         edgeIds: requiresEdges
           .filter(
-            (edge) => componentSet.has(edge.source) && componentSet.has(edge.target)
+            (edge) =>
+              componentSet.has(edge.source) && componentSet.has(edge.target)
           )
           .map((edge) => edge.id)
           .sort((left, right) => left.localeCompare(right))
@@ -314,8 +354,14 @@ function detectCycles(nodes: RuntimeNode[], edges: RuntimeEdge[]): RuntimeCycle[
   }
 }
 
-function hasSelfLoop(nodeId: string | undefined, edges: RuntimeEdge[]): boolean {
-  return nodeId !== undefined && edges.some((edge) => edge.source === nodeId && edge.target === nodeId);
+function hasSelfLoop(
+  nodeId: string | undefined,
+  edges: RuntimeEdge[]
+): boolean {
+  return (
+    nodeId !== undefined &&
+    edges.some((edge) => edge.source === nodeId && edge.target === nodeId)
+  );
 }
 
 function compareCycles(left: RuntimeCycle, right: RuntimeCycle): number {

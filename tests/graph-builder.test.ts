@@ -19,13 +19,15 @@ function createBundle(): Bundle {
         entityTypes: [
           {
             id: "example.entity.ability",
-            schema: "https://schemas.codryn.com/crgs/profiles/example/v0.1/entities/ability.schema.json"
+            schema:
+              "https://schemas.codryn.com/crgs/profiles/example/v0.1/entities/ability.schema.json"
           }
         ],
         requirementTypes: [
           {
             id: "example.requirement.attribute-rating",
-            schema: "https://schemas.codryn.com/crgs/profiles/example/v0.1/requirements/attribute-rating.schema.json"
+            schema:
+              "https://schemas.codryn.com/crgs/profiles/example/v0.1/requirements/attribute-rating.schema.json"
           }
         ],
         effectTypes: [],

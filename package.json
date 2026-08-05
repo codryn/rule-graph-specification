@@ -16,7 +16,8 @@
     "lint:markdown": "markdownlint-cli2 \"**/*.md\" \"#node_modules\"",
     "test": "vitest run",
     "test:conformance": "npm exec vitest run tests/conformance.test.ts",
-    "validate": "npm run validate:schemas && npm run lint && npm run test && npm run build",
+    "validate": "npm run validate:repo",
+    "validate:repo": "npm run validate:schemas && npm run lint && npm run test && npm run build",
     "validate:schemas": "node ./tools/validate-schemas.mjs"
   },
   "devDependencies": {

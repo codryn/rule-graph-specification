@@ -53,7 +53,8 @@ for (const schemaPath of collectFiles(schemaDir)) {
 const validations = [
   {
     name: "Example profile",
-    schemaId: "https://schemas.codryn.com/crgs/v0.1/profile/profile.schema.json",
+    schemaId:
+      "https://schemas.codryn.com/crgs/v0.1/profile/profile.schema.json",
     dataPath: join(rootDir, "profiles", "example", "profile.json")
   },
   {
@@ -78,7 +79,8 @@ let hasFailures = false;
 const schemaChecks = [
   {
     name: "Entity",
-    schemaId: "https://schemas.codryn.com/crgs/v0.1/entities/entity.schema.json",
+    schemaId:
+      "https://schemas.codryn.com/crgs/v0.1/entities/entity.schema.json",
     validExample: {
       id: "feature.adaptable",
       type: "example.entity.trait",
@@ -91,7 +93,8 @@ const schemaChecks = [
   },
   {
     name: "LocalizedText",
-    schemaId: "https://schemas.codryn.com/crgs/v0.1/common/localized-text.schema.json",
+    schemaId:
+      "https://schemas.codryn.com/crgs/v0.1/common/localized-text.schema.json",
     validExample: {
       default: "Human",
       translations: { fr: "Humain" }
@@ -103,7 +106,8 @@ const schemaChecks = [
   },
   {
     name: "SourceReference",
-    schemaId: "https://schemas.codryn.com/crgs/v0.1/common/source-reference.schema.json",
+    schemaId:
+      "https://schemas.codryn.com/crgs/v0.1/common/source-reference.schema.json",
     validExample: {
       title: "Core Rulebook",
       citation: "Core Rulebook, p. 42"
@@ -116,7 +120,8 @@ const schemaChecks = [
   },
   {
     name: "Metadata",
-    schemaId: "https://schemas.codryn.com/crgs/v0.1/common/metadata.schema.json",
+    schemaId:
+      "https://schemas.codryn.com/crgs/v0.1/common/metadata.schema.json",
     validExample: {
       tags: ["example", "minimal"],
       attributes: { reviewed: true }
@@ -127,7 +132,8 @@ const schemaChecks = [
   },
   {
     name: "Relation",
-    schemaId: "https://schemas.codryn.com/crgs/v0.1/relations/relation.schema.json",
+    schemaId:
+      "https://schemas.codryn.com/crgs/v0.1/relations/relation.schema.json",
     validExample: {
       id: "rel.human-grants-adaptable",
       type: "example.relation.grants",
@@ -142,7 +148,8 @@ const schemaChecks = [
   },
   {
     name: "RequirementExpression",
-    schemaId: "https://schemas.codryn.com/crgs/v0.1/requirements/requirement-expression.schema.json",
+    schemaId:
+      "https://schemas.codryn.com/crgs/v0.1/requirements/requirement-expression.schema.json",
     validExample: {
       kind: "group",
       mode: "all",
@@ -163,7 +170,8 @@ const schemaChecks = [
   },
   {
     name: "RequirementGroup",
-    schemaId: "https://schemas.codryn.com/crgs/v0.1/requirements/requirement-group.schema.json",
+    schemaId:
+      "https://schemas.codryn.com/crgs/v0.1/requirements/requirement-group.schema.json",
     validExample: {
       kind: "group",
       mode: "any",
@@ -183,7 +191,8 @@ const schemaChecks = [
   },
   {
     name: "AtomicRequirement",
-    schemaId: "https://schemas.codryn.com/crgs/v0.1/requirements/atomic-requirement.schema.json",
+    schemaId:
+      "https://schemas.codryn.com/crgs/v0.1/requirements/atomic-requirement.schema.json",
     validExample: {
       kind: "fact",
       fact: "selected:ancestry",
@@ -198,10 +207,12 @@ const schemaChecks = [
   },
   {
     name: "ExtensionRegistration",
-    schemaId: "https://schemas.codryn.com/crgs/v0.1/profile/extension-registration.schema.json",
+    schemaId:
+      "https://schemas.codryn.com/crgs/v0.1/profile/extension-registration.schema.json",
     validExample: {
       id: "example.entity.ability",
-      schema: "https://schemas.codryn.com/crgs/profiles/example/v0.1/entities/ability.schema.json"
+      schema:
+        "https://schemas.codryn.com/crgs/profiles/example/v0.1/entities/ability.schema.json"
     },
     invalidExample: {
       id: "ability",
@@ -210,7 +221,8 @@ const schemaChecks = [
   },
   {
     name: "ProfileDependency",
-    schemaId: "https://schemas.codryn.com/crgs/v0.1/profile/profile-dependency.schema.json",
+    schemaId:
+      "https://schemas.codryn.com/crgs/v0.1/profile/profile-dependency.schema.json",
     validExample: {
       profileId: "codryn.base.common",
       versionRange: "^1.0.0"
@@ -222,7 +234,8 @@ const schemaChecks = [
   },
   {
     name: "ProfileManifest",
-    schemaId: "https://schemas.codryn.com/crgs/v0.1/profile/profile-manifest.schema.json",
+    schemaId:
+      "https://schemas.codryn.com/crgs/v0.1/profile/profile-manifest.schema.json",
     validExample: {
       id: "example.profile.demo",
       name: "Example RPG",
@@ -232,7 +245,8 @@ const schemaChecks = [
         entityTypes: [
           {
             id: "example.entity.trait",
-            schema: "https://schemas.codryn.com/crgs/profiles/example/v0.1/entities/trait.schema.json"
+            schema:
+              "https://schemas.codryn.com/crgs/profiles/example/v0.1/entities/trait.schema.json"
           }
         ]
       }
@@ -246,7 +260,8 @@ const schemaChecks = [
         entityTypes: [
           {
             id: "trait",
-            schema: "https://schemas.codryn.com/crgs/profiles/example/v0.1/entities/trait.schema.json"
+            schema:
+              "https://schemas.codryn.com/crgs/profiles/example/v0.1/entities/trait.schema.json"
           }
         ],
         extra: ["nope"]
@@ -255,7 +270,8 @@ const schemaChecks = [
   },
   {
     name: "DatasetManifest",
-    schemaId: "https://schemas.codryn.com/crgs/v0.1/bundle/dataset-manifest.schema.json",
+    schemaId:
+      "https://schemas.codryn.com/crgs/v0.1/bundle/dataset-manifest.schema.json",
     validExample: {
       id: "example-rpg.minimal",
       title: "Example RPG Minimal Bundle",
@@ -285,13 +301,15 @@ const schemaChecks = [
           entityTypes: [
             {
               id: "example.entity.trait",
-              schema: "https://schemas.codryn.com/crgs/profiles/example/v0.1/entities/trait.schema.json"
+              schema:
+                "https://schemas.codryn.com/crgs/profiles/example/v0.1/entities/trait.schema.json"
             }
           ],
           relationTypes: [
             {
               id: "example.relation.grants",
-              schema: "https://schemas.codryn.com/crgs/profiles/example/v0.1/relations/grants.schema.json"
+              schema:
+                "https://schemas.codryn.com/crgs/profiles/example/v0.1/relations/grants.schema.json"
             }
           ]
         }
@@ -327,7 +345,8 @@ const schemaChecks = [
   },
   {
     name: "Profile",
-    schemaId: "https://schemas.codryn.com/crgs/v0.1/profile/profile.schema.json",
+    schemaId:
+      "https://schemas.codryn.com/crgs/v0.1/profile/profile.schema.json",
     validExample: {
       id: "example.profile.demo",
       name: "Example RPG",
@@ -337,7 +356,8 @@ const schemaChecks = [
         entityTypes: [
           {
             id: "example.entity.trait",
-            schema: "https://schemas.codryn.com/crgs/profiles/example/v0.1/entities/trait.schema.json"
+            schema:
+              "https://schemas.codryn.com/crgs/profiles/example/v0.1/entities/trait.schema.json"
           }
         ]
       }
@@ -350,7 +370,8 @@ const schemaChecks = [
         relationTypes: [
           {
             id: "grants",
-            schema: "https://schemas.codryn.com/crgs/profiles/example/v0.1/relations/grants.schema.json"
+            schema:
+              "https://schemas.codryn.com/crgs/profiles/example/v0.1/relations/grants.schema.json"
           }
         ]
       }
@@ -358,7 +379,8 @@ const schemaChecks = [
   },
   {
     name: "Manifest",
-    schemaId: "https://schemas.codryn.com/crgs/v0.1/bundle/manifest.schema.json",
+    schemaId:
+      "https://schemas.codryn.com/crgs/v0.1/bundle/manifest.schema.json",
     validExample: {
       id: "example-rpg.minimal",
       title: "Example RPG Minimal Bundle",
@@ -371,7 +393,8 @@ const schemaChecks = [
   },
   {
     name: "Relationship",
-    schemaId: "https://schemas.codryn.com/crgs/v0.1/relations/relationship.schema.json",
+    schemaId:
+      "https://schemas.codryn.com/crgs/v0.1/relations/relationship.schema.json",
     validExample: {
       id: "rel.human-grants-adaptable",
       type: "example.relation.grants",
@@ -401,11 +424,18 @@ for (const check of schemaChecks) {
 
   if (schema.type === "object") {
     if (!("required" in schema)) {
-      fail(`Schema structure missing: ${check.name} lacks explicit required fields`);
+      fail(
+        `Schema structure missing: ${check.name} lacks explicit required fields`
+      );
     }
 
-    if (!("additionalProperties" in schema) && !("unevaluatedProperties" in schema)) {
-      fail(`Schema structure missing: ${check.name} lacks additionalProperties control`);
+    if (
+      !("additionalProperties" in schema) &&
+      !("unevaluatedProperties" in schema)
+    ) {
+      fail(
+        `Schema structure missing: ${check.name} lacks additionalProperties control`
+      );
     }
   }
 

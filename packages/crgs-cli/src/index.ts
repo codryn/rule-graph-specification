@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
- import {
+import { spawnSync } from "node:child_process";
+import {
   mkdirSync,
   readFileSync,
   readdirSync,
@@ -64,8 +65,10 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(__dirname, "..", "..", "..");
 const schemaDir = join(repoRoot, "schemas");
 const packageJsonPath = join(repoRoot, "packages", "crgs-cli", "package.json");
-const bundleSchemaId = "https://schemas.codryn.com/crgs/v0.1/bundle/bundle.schema.json";
-const profileSchemaId = "https://schemas.codryn.com/crgs/v0.1/profile/profile.schema.json";
+const bundleSchemaId =
+  "https://schemas.codryn.com/crgs/v0.1/bundle/bundle.schema.json";
+const profileSchemaId =
+  "https://schemas.codryn.com/crgs/v0.1/profile/profile.schema.json";
 const Ajv2020 = Ajv2020Module as unknown as new (options: {
   allErrors: boolean;
   strict: boolean;
@@ -77,7 +80,8 @@ const cliVersion = readVersion();
 export const commands: CliCommandDescriptor[] = [
   {
     name: "validate",
-    summary: "Validate CRGS bundles and profiles against schemas and reference rules."
+    summary:
+      "Validate CRGS bundles and profiles against schemas and reference rules."
   },
   {
     name: "build",
@@ -85,11 +89,13 @@ export const commands: CliCommandDescriptor[] = [
   },
   {
     name: "graph",
-    summary: "Build a deterministic runtime graph artifact from a validated bundle."
+    summary:
+      "Build a deterministic runtime graph artifact from a validated bundle."
   },
   {
     name: "evaluate",
-    summary: "Evaluate a target entity against a character subject and report missing prerequisites."
+    summary:
+      "Evaluate a target entity against a character subject and report missing prerequisites."
   }
 ];
 
@@ -130,9 +136,14 @@ export async function main(argv: string[]): Promise<number> {
 }
 
 async function runValidateCommand(args: string[]): Promise<number> {
+  if (args.includes("--repo") || args.includes("--workspace")) {
+    return runRepositoryValidation();
+  }
+
   const input = args[0];
   if (!input) {
     console.error("Usage: crgs validate <path>");
+    console.error("       crgs validate --repo");
     return 1;
   }
 
@@ -141,6 +152,20 @@ async function runValidateCommand(args: string[]): Promise<number> {
   writeJsonToStdout({ valid, reports });
 
   return valid ? 0 : 1;
+}
+
+function runRepositoryValidation(): number {
+  const result = spawnSync("npm", ["run", "validate:repo"], {
+    cwd: repoRoot,
+    shell: process.platform === "win32",
+    stdio: "inherit"
+  });
+
+  if (result.error) {
+    throw result.error;
+  }
+
+  return result.status ?? 1;
 }
 
 async function runBuildCommand(args: string[]): Promise<number> {
@@ -249,7 +274,9 @@ function validatePath(inputPath: string): CliValidationReport[] {
     }
 
     if (reports.length === 0) {
-      throw new Error(`No supported CRGS files found in directory: ${inputPath}`);
+      throw new Error(
+        `No supported CRGS files found in directory: ${inputPath}`
+      );
     }
 
     return reports;
@@ -370,7 +397,10 @@ function mapSchemaErrors(errors: ErrorObject[]): CliValidationIssue[] {
   }));
 }
 
-function mapResolverIssues(bundle: Bundle, issues: ResolverIssue[]): CliValidationIssue[] {
+function mapResolverIssues(
+  bundle: Bundle,
+  issues: ResolverIssue[]
+): CliValidationIssue[] {
   return issues.map((issue) => ({
     code: mapResolverIssueCode(issue.code),
     path: issue.path,
@@ -393,7 +423,10 @@ function mapResolverIssueCode(code: ResolverIssue["code"]): string {
   }
 }
 
-function readStringAtJsonPointer(value: unknown, pointer: string): string | undefined {
+function readStringAtJsonPointer(
+  value: unknown,
+  pointer: string
+): string | undefined {
   const segments = pointer
     .split("/")
     .slice(1)
@@ -419,7 +452,10 @@ function findPathToTarget(
   const startNodeIds = new Set<string>(subject.entityIds ?? []);
 
   for (const node of graph.nodes) {
-    if (node.kind === "virtual-threshold" && isThresholdSatisfied(node, subject)) {
+    if (
+      node.kind === "virtual-threshold" &&
+      isThresholdSatisfied(node, subject)
+    ) {
       startNodeIds.add(node.id);
     }
   }
@@ -429,7 +465,9 @@ function findPathToTarget(
   }
 
   const outgoing = new Map<string, string[]>();
-  for (const edge of graph.edges.filter((candidate) => candidate.type === "requires")) {
+  for (const edge of graph.edges.filter(
+    (candidate) => candidate.type === "requires"
+  )) {
     const nextTargets = outgoing.get(edge.source) ?? [];
     nextTargets.push(edge.target);
     outgoing.set(edge.source, nextTargets);
@@ -439,7 +477,9 @@ function findPathToTarget(
     targets.sort((left, right) => left.localeCompare(right));
   }
 
-  const queue = [...startNodeIds].sort((left, right) => left.localeCompare(right));
+  const queue = [...startNodeIds].sort((left, right) =>
+    left.localeCompare(right)
+  );
   const previousByNode = new Map<string, string | null>();
 
   for (const nodeId of queue) {
@@ -469,7 +509,10 @@ function findPathToTarget(
   return [];
 }
 
-function buildPath(previousByNode: Map<string, string | null>, targetId: string): string[] {
+function buildPath(
+  previousByNode: Map<string, string | null>,
+  targetId: string
+): string[] {
   const path: string[] = [];
   let current: string | null | undefined = targetId;
 
@@ -497,14 +540,25 @@ function isThresholdSatisfied(
 }
 
 function isBundleLike(value: unknown): value is Bundle {
-  return hasProperty(value, "manifest") && hasProperty(value, "entities") && hasProperty(value, "relationships");
+  return (
+    hasProperty(value, "manifest") &&
+    hasProperty(value, "entities") &&
+    hasProperty(value, "relationships")
+  );
 }
 
 function isProfileLike(value: unknown): value is Profile {
-  return hasProperty(value, "extensions") && hasProperty(value, "specVersion") && !hasProperty(value, "manifest");
+  return (
+    hasProperty(value, "extensions") &&
+    hasProperty(value, "specVersion") &&
+    !hasProperty(value, "manifest")
+  );
 }
 
-function hasProperty(value: unknown, key: string): value is Record<string, unknown> {
+function hasProperty(
+  value: unknown,
+  key: string
+): value is Record<string, unknown> {
   return value !== null && typeof value === "object" && key in value;
 }
 
@@ -570,6 +624,10 @@ function printHelp(): void {
     writeLine(`  ${command.name.padEnd(8)} ${command.summary}`);
   }
   writeLine("");
+  writeLine("Validation Modes:");
+  writeLine("  crgs validate <path>   Validate a bundle, profile, or profile directory.");
+  writeLine("  crgs validate --repo   Run the full repository validation pipeline.");
+  writeLine("");
   writeLine("Options:");
   writeLine("  -h, --help     Show CLI usage.");
   writeLine("  -v, --version  Print CLI version.");
@@ -616,7 +674,8 @@ class CliCommandError extends Error {
 
 if (
   process.argv[1] &&
-  realpathSync(resolve(process.argv[1])) === realpathSync(fileURLToPath(import.meta.url))
+  realpathSync(resolve(process.argv[1])) ===
+    realpathSync(fileURLToPath(import.meta.url))
 ) {
   void main(process.argv.slice(2)).then((code) => {
     process.exitCode = code;

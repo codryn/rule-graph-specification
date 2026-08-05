@@ -22,25 +22,29 @@ function createBundle(): Bundle {
         entityTypes: [
           {
             id: "example.entity.trait",
-            schema: "https://schemas.codryn.com/crgs/profiles/example/v0.1/entities/trait.schema.json"
+            schema:
+              "https://schemas.codryn.com/crgs/profiles/example/v0.1/entities/trait.schema.json"
           }
         ],
         requirementTypes: [
           {
             id: "example.requirement.attribute-rating",
-            schema: "https://schemas.codryn.com/crgs/profiles/example/v0.1/requirements/attribute-rating.schema.json"
+            schema:
+              "https://schemas.codryn.com/crgs/profiles/example/v0.1/requirements/attribute-rating.schema.json"
           }
         ],
         effectTypes: [
           {
             id: "example.effect.grant",
-            schema: "https://schemas.codryn.com/crgs/profiles/example/v0.1/effects/grant.schema.json"
+            schema:
+              "https://schemas.codryn.com/crgs/profiles/example/v0.1/effects/grant.schema.json"
           }
         ],
         relationTypes: [
           {
             id: "example.relation.grants",
-            schema: "https://schemas.codryn.com/crgs/profiles/example/v0.1/relations/grants.schema.json"
+            schema:
+              "https://schemas.codryn.com/crgs/profiles/example/v0.1/relations/grants.schema.json"
           }
         ]
       }
@@ -90,9 +94,15 @@ describe("resolveBundle", () => {
   it("builds an entity index for a valid bundle", () => {
     const resolved = resolveBundle(createBundle());
 
-    expect(resolved.index.byId.get("ancestry.human")?.label.default).toBe("Human");
-    expect(resolved.index.outgoingRelations.get("ancestry.human")).toHaveLength(1);
-    expect(resolved.index.incomingRelations.get("feature.adaptable")).toHaveLength(1);
+    expect(resolved.index.byId.get("ancestry.human")?.label.default).toBe(
+      "Human"
+    );
+    expect(resolved.index.outgoingRelations.get("ancestry.human")).toHaveLength(
+      1
+    );
+    expect(
+      resolved.index.incomingRelations.get("feature.adaptable")
+    ).toHaveLength(1);
   });
 
   it("rejects duplicate entity ids", () => {
@@ -115,7 +125,11 @@ describe("resolveBundle", () => {
       from: "ancestry.unknown"
     };
 
-    expectResolverIssue(bundle, "UNKNOWN_REFERENCED_ENTITY", "/relationships/0/from");
+    expectResolverIssue(
+      bundle,
+      "UNKNOWN_REFERENCED_ENTITY",
+      "/relationships/0/from"
+    );
   });
 
   it("rejects invalid profile namespaces", () => {
@@ -125,7 +139,11 @@ describe("resolveBundle", () => {
       type: "other.entity.trait"
     };
 
-    expectResolverIssue(bundle, "INVALID_PROFILE_NAMESPACE", "/entities/0/type");
+    expectResolverIssue(
+      bundle,
+      "INVALID_PROFILE_NAMESPACE",
+      "/entities/0/type"
+    );
   });
 
   it("rejects unsupported requirement types", () => {
@@ -137,7 +155,11 @@ describe("resolveBundle", () => {
       } as Bundle["entities"][number]["requirements"]
     };
 
-    expectResolverIssue(bundle, "UNSUPPORTED_REQUIREMENT_TYPE", "/entities/1/requirements/kind");
+    expectResolverIssue(
+      bundle,
+      "UNSUPPORTED_REQUIREMENT_TYPE",
+      "/entities/1/requirements/kind"
+    );
   });
 
   it("rejects invalid relation targets", () => {
@@ -147,7 +169,11 @@ describe("resolveBundle", () => {
       to: "feature.unknown"
     };
 
-    expectResolverIssue(bundle, "INVALID_RELATION_TARGET", "/relationships/0/to");
+    expectResolverIssue(
+      bundle,
+      "INVALID_RELATION_TARGET",
+      "/relationships/0/to"
+    );
   });
 });
 
