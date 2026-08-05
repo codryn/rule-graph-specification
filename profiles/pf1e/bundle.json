@@ -1,0 +1,673 @@
+{
+  "specVersion": "0.2.0",
+  "manifest": {
+    "id": "pf1e.reference-feat-slice",
+    "title": "Pathfinder First Edition Feat Slice",
+    "datasetVersion": "0.1.0",
+    "description": "A constrained Pathfinder First Edition vertical slice focused on feat prerequisites and parameterized feat chains."
+  },
+  "profile": {
+    "id": "pf1e.profile.pathfinder-first-edition",
+    "name": "Pathfinder First Edition",
+    "version": "0.1.0",
+    "specVersion": "0.2.0",
+    "description": "Executable Pathfinder First Edition feat-slice profile for CRGS 0.2.",
+    "extensions": {
+      "entityTypes": [
+        {
+          "id": "pf1e.entity.feat",
+          "schema": "https://schemas.codryn.com/crgs/profiles/pf1e/v0.1/entities/feat.schema.json"
+        },
+        {
+          "id": "pf1e.entity.class",
+          "schema": "https://schemas.codryn.com/crgs/profiles/pf1e/v0.1/entities/class.schema.json"
+        },
+        {
+          "id": "pf1e.entity.skill",
+          "schema": "https://schemas.codryn.com/crgs/profiles/pf1e/v0.1/entities/skill.schema.json"
+        },
+        {
+          "id": "pf1e.entity.source",
+          "schema": "https://schemas.codryn.com/crgs/profiles/pf1e/v0.1/entities/source.schema.json"
+        }
+      ],
+      "requirementTypes": [
+        {
+          "id": "pf1e.requirement.ability-score",
+          "schema": "https://schemas.codryn.com/crgs/profiles/pf1e/v0.1/requirements/ability-score.schema.json"
+        },
+        {
+          "id": "pf1e.requirement.base-attack-bonus",
+          "schema": "https://schemas.codryn.com/crgs/profiles/pf1e/v0.1/requirements/base-attack-bonus.schema.json"
+        },
+        {
+          "id": "pf1e.requirement.character-level",
+          "schema": "https://schemas.codryn.com/crgs/profiles/pf1e/v0.1/requirements/character-level.schema.json"
+        },
+        {
+          "id": "pf1e.requirement.class-level",
+          "schema": "https://schemas.codryn.com/crgs/profiles/pf1e/v0.1/requirements/class-level.schema.json"
+        },
+        {
+          "id": "pf1e.requirement.skill-ranks",
+          "schema": "https://schemas.codryn.com/crgs/profiles/pf1e/v0.1/requirements/skill-ranks.schema.json"
+        },
+        {
+          "id": "pf1e.requirement.feat",
+          "schema": "https://schemas.codryn.com/crgs/profiles/pf1e/v0.1/requirements/feat.schema.json"
+        }
+      ],
+      "effectTypes": [],
+      "relationTypes": []
+    }
+  },
+  "entities": [
+    {
+      "id": "pf1e.source.core-rulebook",
+      "type": "pf1e.entity.source",
+      "label": {
+        "default": "Pathfinder RPG Core Rulebook"
+      },
+      "data": {
+        "code": "crb"
+      }
+    },
+    {
+      "id": "pf1e.class.fighter",
+      "type": "pf1e.entity.class",
+      "label": {
+        "default": "Fighter"
+      },
+      "data": {
+        "classKey": "fighter"
+      },
+      "source": {
+        "title": "Pathfinder RPG Core Rulebook",
+        "citation": "Core Rulebook, Fighter class",
+        "locator": "Class chapter"
+      }
+    },
+    {
+      "id": "pf1e.skill.acrobatics",
+      "type": "pf1e.entity.skill",
+      "label": {
+        "default": "Acrobatics"
+      },
+      "data": {
+        "skillKey": "acrobatics",
+        "ability": "dex"
+      }
+    },
+    {
+      "id": "pf1e.skill.knowledge-arcana",
+      "type": "pf1e.entity.skill",
+      "label": {
+        "default": "Knowledge (Arcana)"
+      },
+      "data": {
+        "skillKey": "knowledge-arcana",
+        "ability": "int"
+      }
+    },
+    {
+      "id": "pf1e.feat.power-attack",
+      "type": "pf1e.entity.feat",
+      "label": {
+        "default": "Power Attack",
+        "translations": {
+          "de": "Heftiger Angriff"
+        }
+      },
+      "source": {
+        "title": "Pathfinder RPG Core Rulebook",
+        "citation": "Core Rulebook, Power Attack",
+        "locator": "Feats chapter"
+      },
+      "data": {
+        "familyId": "power-attack",
+        "featTypes": ["combat", "fighter-bonus"],
+        "repeatable": false,
+        "summary": {
+          "default": "Trade accuracy for extra melee damage."
+        }
+      },
+      "requirements": {
+        "kind": "group",
+        "mode": "all",
+        "children": [
+          {
+            "kind": "fact",
+            "fact": "pf1e.ability.str",
+            "operator": "atLeast",
+            "value": 13
+          },
+          {
+            "kind": "fact",
+            "fact": "pf1e.base-attack-bonus",
+            "operator": "atLeast",
+            "value": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "pf1e.feat.cleave",
+      "type": "pf1e.entity.feat",
+      "label": {
+        "default": "Cleave"
+      },
+      "source": {
+        "title": "Pathfinder RPG Core Rulebook",
+        "citation": "Core Rulebook, Cleave",
+        "locator": "Feats chapter"
+      },
+      "data": {
+        "familyId": "cleave",
+        "featTypes": ["combat", "fighter-bonus"],
+        "repeatable": false,
+        "summary": {
+          "default": "Make an additional adjacent attack after dropping a foe."
+        }
+      },
+      "requirements": {
+        "kind": "group",
+        "mode": "all",
+        "children": [
+          {
+            "kind": "crgs.requirement.entity",
+            "targetId": "pf1e.feat.power-attack"
+          },
+          {
+            "kind": "fact",
+            "fact": "pf1e.ability.str",
+            "operator": "atLeast",
+            "value": 13
+          }
+        ]
+      }
+    },
+    {
+      "id": "pf1e.feat.great-cleave",
+      "type": "pf1e.entity.feat",
+      "label": {
+        "default": "Great Cleave"
+      },
+      "source": {
+        "title": "Pathfinder RPG Core Rulebook",
+        "citation": "Core Rulebook, Great Cleave",
+        "locator": "Feats chapter"
+      },
+      "data": {
+        "familyId": "great-cleave",
+        "featTypes": ["combat", "fighter-bonus"],
+        "repeatable": false,
+        "summary": {
+          "default": "Continue cleaving through multiple adjacent opponents."
+        }
+      },
+      "requirements": {
+        "kind": "group",
+        "mode": "all",
+        "children": [
+          {
+            "kind": "crgs.requirement.entity",
+            "targetId": "pf1e.feat.cleave"
+          },
+          {
+            "kind": "fact",
+            "fact": "pf1e.base-attack-bonus",
+            "operator": "atLeast",
+            "value": 4
+          }
+        ]
+      }
+    },
+    {
+      "id": "pf1e.feat.combat-expertise",
+      "type": "pf1e.entity.feat",
+      "label": {
+        "default": "Combat Expertise"
+      },
+      "source": {
+        "title": "Pathfinder RPG Core Rulebook",
+        "citation": "Core Rulebook, Combat Expertise",
+        "locator": "Feats chapter"
+      },
+      "data": {
+        "familyId": "combat-expertise",
+        "featTypes": ["combat", "fighter-bonus"],
+        "repeatable": false,
+        "summary": {
+          "default": "Trade accuracy for Armor Class."
+        }
+      },
+      "requirements": {
+        "kind": "fact",
+        "fact": "pf1e.ability.int",
+        "operator": "atLeast",
+        "value": 13
+      }
+    },
+    {
+      "id": "pf1e.feat.improved-trip",
+      "type": "pf1e.entity.feat",
+      "label": {
+        "default": "Improved Trip"
+      },
+      "source": {
+        "title": "Pathfinder RPG Core Rulebook",
+        "citation": "Core Rulebook, Improved Trip",
+        "locator": "Feats chapter"
+      },
+      "data": {
+        "familyId": "improved-trip",
+        "featTypes": ["combat", "fighter-bonus"],
+        "repeatable": false,
+        "summary": {
+          "default": "Gain a bonus on trip attempts and avoid attacks of opportunity."
+        }
+      },
+      "requirements": {
+        "kind": "group",
+        "mode": "all",
+        "children": [
+          {
+            "kind": "crgs.requirement.entity",
+            "targetId": "pf1e.feat.combat-expertise"
+          },
+          {
+            "kind": "fact",
+            "fact": "pf1e.ability.int",
+            "operator": "atLeast",
+            "value": 13
+          }
+        ]
+      }
+    },
+    {
+      "id": "pf1e.feat.greater-trip",
+      "type": "pf1e.entity.feat",
+      "label": {
+        "default": "Greater Trip"
+      },
+      "source": {
+        "title": "Pathfinder RPG Core Rulebook",
+        "citation": "Core Rulebook, Greater Trip",
+        "locator": "Feats chapter"
+      },
+      "data": {
+        "familyId": "greater-trip",
+        "featTypes": ["combat", "fighter-bonus"],
+        "repeatable": false,
+        "summary": {
+          "default": "Enemies provoke when you trip them."
+        }
+      },
+      "requirements": {
+        "kind": "group",
+        "mode": "all",
+        "children": [
+          {
+            "kind": "crgs.requirement.entity",
+            "targetId": "pf1e.feat.improved-trip"
+          },
+          {
+            "kind": "fact",
+            "fact": "pf1e.base-attack-bonus",
+            "operator": "atLeast",
+            "value": 6
+          }
+        ]
+      }
+    },
+    {
+      "id": "pf1e.feat.dodge",
+      "type": "pf1e.entity.feat",
+      "label": {
+        "default": "Dodge"
+      },
+      "source": {
+        "title": "Pathfinder RPG Core Rulebook",
+        "citation": "Core Rulebook, Dodge",
+        "locator": "Feats chapter"
+      },
+      "data": {
+        "familyId": "dodge",
+        "featTypes": ["combat", "fighter-bonus"],
+        "repeatable": false,
+        "summary": {
+          "default": "Gain a dodge bonus to Armor Class."
+        }
+      },
+      "requirements": {
+        "kind": "fact",
+        "fact": "pf1e.ability.dex",
+        "operator": "atLeast",
+        "value": 13
+      }
+    },
+    {
+      "id": "pf1e.feat.mobility",
+      "type": "pf1e.entity.feat",
+      "label": {
+        "default": "Mobility"
+      },
+      "source": {
+        "title": "Pathfinder RPG Core Rulebook",
+        "citation": "Core Rulebook, Mobility",
+        "locator": "Feats chapter"
+      },
+      "data": {
+        "familyId": "mobility",
+        "featTypes": ["combat", "fighter-bonus"],
+        "repeatable": false,
+        "summary": {
+          "default": "Improve defense while moving through threatened areas."
+        }
+      },
+      "requirements": {
+        "kind": "group",
+        "mode": "all",
+        "children": [
+          {
+            "kind": "crgs.requirement.entity",
+            "targetId": "pf1e.feat.dodge"
+          },
+          {
+            "kind": "fact",
+            "fact": "pf1e.ability.dex",
+            "operator": "atLeast",
+            "value": 13
+          }
+        ]
+      }
+    },
+    {
+      "id": "pf1e.feat.spring-attack",
+      "type": "pf1e.entity.feat",
+      "label": {
+        "default": "Spring Attack"
+      },
+      "source": {
+        "title": "Pathfinder RPG Core Rulebook",
+        "citation": "Core Rulebook, Spring Attack",
+        "locator": "Feats chapter"
+      },
+      "data": {
+        "familyId": "spring-attack",
+        "featTypes": ["combat", "fighter-bonus"],
+        "repeatable": false,
+        "summary": {
+          "default": "Move, attack once, and finish moving."
+        }
+      },
+      "requirements": {
+        "kind": "group",
+        "mode": "all",
+        "children": [
+          {
+            "kind": "crgs.requirement.entity",
+            "targetId": "pf1e.feat.dodge"
+          },
+          {
+            "kind": "crgs.requirement.entity",
+            "targetId": "pf1e.feat.mobility"
+          },
+          {
+            "kind": "fact",
+            "fact": "pf1e.ability.dex",
+            "operator": "atLeast",
+            "value": 13
+          },
+          {
+            "kind": "fact",
+            "fact": "pf1e.base-attack-bonus",
+            "operator": "atLeast",
+            "value": 4
+          }
+        ]
+      }
+    },
+    {
+      "id": "pf1e.feat.acrobatic-steps",
+      "type": "pf1e.entity.feat",
+      "label": {
+        "default": "Acrobatic Steps"
+      },
+      "source": {
+        "title": "Pathfinder RPG Core Rulebook",
+        "citation": "Core Rulebook, Acrobatic Steps",
+        "locator": "Feats chapter"
+      },
+      "data": {
+        "familyId": "acrobatic-steps",
+        "featTypes": ["combat"],
+        "repeatable": false,
+        "summary": {
+          "default": "Move through difficult footing with less penalty."
+        }
+      },
+      "requirements": {
+        "kind": "group",
+        "mode": "all",
+        "children": [
+          {
+            "kind": "fact",
+            "fact": "pf1e.ability.dex",
+            "operator": "atLeast",
+            "value": 15
+          },
+          {
+            "kind": "fact",
+            "fact": "pf1e.skill-ranks.acrobatics",
+            "operator": "atLeast",
+            "value": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "pf1e.feat.leadership",
+      "type": "pf1e.entity.feat",
+      "label": {
+        "default": "Leadership"
+      },
+      "source": {
+        "title": "Pathfinder RPG Core Rulebook",
+        "citation": "Core Rulebook, Leadership",
+        "locator": "Feats chapter"
+      },
+      "data": {
+        "familyId": "leadership",
+        "featTypes": ["social"],
+        "repeatable": false,
+        "summary": {
+          "default": "Attract loyal followers and a cohort."
+        }
+      },
+      "requirements": {
+        "kind": "fact",
+        "fact": "pf1e.character-level",
+        "operator": "atLeast",
+        "value": 7
+      }
+    },
+    {
+      "id": "pf1e.feat.weapon-focus.longsword",
+      "type": "pf1e.entity.feat",
+      "label": {
+        "default": "Weapon Focus"
+      },
+      "source": {
+        "title": "Pathfinder RPG Core Rulebook",
+        "citation": "Core Rulebook, Weapon Focus",
+        "locator": "Feats chapter"
+      },
+      "data": {
+        "familyId": "weapon-focus",
+        "featTypes": ["combat", "fighter-bonus"],
+        "repeatable": true,
+        "summary": {
+          "default": "Gain a bonus with one chosen weapon."
+        },
+        "parameter": {
+          "kind": "weapon",
+          "value": "longsword"
+        }
+      },
+      "requirements": {
+        "kind": "fact",
+        "fact": "pf1e.base-attack-bonus",
+        "operator": "atLeast",
+        "value": 1
+      }
+    },
+    {
+      "id": "pf1e.feat.weapon-focus.greatsword",
+      "type": "pf1e.entity.feat",
+      "label": {
+        "default": "Weapon Focus"
+      },
+      "source": {
+        "title": "Pathfinder RPG Core Rulebook",
+        "citation": "Core Rulebook, Weapon Focus",
+        "locator": "Feats chapter"
+      },
+      "data": {
+        "familyId": "weapon-focus",
+        "featTypes": ["combat", "fighter-bonus"],
+        "repeatable": true,
+        "summary": {
+          "default": "Gain a bonus with one chosen weapon."
+        },
+        "parameter": {
+          "kind": "weapon",
+          "value": "greatsword"
+        }
+      },
+      "requirements": {
+        "kind": "fact",
+        "fact": "pf1e.base-attack-bonus",
+        "operator": "atLeast",
+        "value": 1
+      }
+    },
+    {
+      "id": "pf1e.feat.weapon-specialization.longsword",
+      "type": "pf1e.entity.feat",
+      "label": {
+        "default": "Weapon Specialization"
+      },
+      "source": {
+        "title": "Pathfinder RPG Core Rulebook",
+        "citation": "Core Rulebook, Weapon Specialization",
+        "locator": "Feats chapter"
+      },
+      "data": {
+        "familyId": "weapon-specialization",
+        "featTypes": ["combat", "fighter-bonus"],
+        "repeatable": true,
+        "summary": {
+          "default": "Gain extra damage with one chosen weapon."
+        },
+        "parameter": {
+          "kind": "weapon",
+          "value": "longsword"
+        }
+      },
+      "requirements": {
+        "kind": "group",
+        "mode": "all",
+        "children": [
+          {
+            "kind": "crgs.requirement.entity",
+            "targetId": "pf1e.feat.weapon-focus.longsword"
+          },
+          {
+            "kind": "fact",
+            "fact": "pf1e.class-level.fighter",
+            "operator": "atLeast",
+            "value": 4
+          }
+        ]
+      }
+    },
+    {
+      "id": "pf1e.feat.spell-focus.evocation",
+      "type": "pf1e.entity.feat",
+      "label": {
+        "default": "Spell Focus"
+      },
+      "source": {
+        "title": "Pathfinder RPG Core Rulebook",
+        "citation": "Core Rulebook, Spell Focus",
+        "locator": "Feats chapter"
+      },
+      "data": {
+        "familyId": "spell-focus",
+        "featTypes": ["magic"],
+        "repeatable": true,
+        "summary": {
+          "default": "Increase the save DC of spells from one chosen school."
+        },
+        "parameter": {
+          "kind": "spell-school",
+          "value": "evocation"
+        }
+      }
+    },
+    {
+      "id": "pf1e.feat.spell-focus.necromancy",
+      "type": "pf1e.entity.feat",
+      "label": {
+        "default": "Spell Focus"
+      },
+      "source": {
+        "title": "Pathfinder RPG Core Rulebook",
+        "citation": "Core Rulebook, Spell Focus",
+        "locator": "Feats chapter"
+      },
+      "data": {
+        "familyId": "spell-focus",
+        "featTypes": ["magic"],
+        "repeatable": true,
+        "summary": {
+          "default": "Increase the save DC of spells from one chosen school."
+        },
+        "parameter": {
+          "kind": "spell-school",
+          "value": "necromancy"
+        }
+      }
+    },
+    {
+      "id": "pf1e.feat.greater-spell-focus.evocation",
+      "type": "pf1e.entity.feat",
+      "label": {
+        "default": "Greater Spell Focus"
+      },
+      "source": {
+        "title": "Pathfinder RPG Core Rulebook",
+        "citation": "Core Rulebook, Greater Spell Focus",
+        "locator": "Feats chapter"
+      },
+      "data": {
+        "familyId": "greater-spell-focus",
+        "featTypes": ["magic"],
+        "repeatable": true,
+        "summary": {
+          "default": "Further increase the save DC of spells from the same chosen school."
+        },
+        "parameter": {
+          "kind": "spell-school",
+          "value": "evocation"
+        }
+      },
+      "requirements": {
+        "kind": "crgs.requirement.entity",
+        "targetId": "pf1e.feat.spell-focus.evocation"
+      }
+    }
+  ],
+  "relationships": []
+}

@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.codryn.com/crgs/profiles/pf1e/v0.1/entities/source.schema.json",
+  "title": "PF1eSourceEntity",
+  "allOf": [
+    {
+      "$ref": "https://schemas.codryn.com/crgs/v0.2/entities/entity.schema.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "pf1e.entity.source"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "code": {
+              "enum": ["crb"]
+            }
+          },
+          "required": ["code"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["type", "data"]
+    }
+  ]
+}

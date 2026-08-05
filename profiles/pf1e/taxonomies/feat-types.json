@@ -1,0 +1,18 @@
+[
+  {
+    "id": "combat",
+    "label": "Combat"
+  },
+  {
+    "id": "fighter-bonus",
+    "label": "Fighter Bonus Feat"
+  },
+  {
+    "id": "magic",
+    "label": "Magic"
+  },
+  {
+    "id": "social",
+    "label": "Social"
+  }
+]

@@ -23,5 +23,7 @@ describe("schema validation", () => {
     expect(stdout).toContain("Validated: Minimal example bundle");
     expect(stdout).toContain("Validated: Advanced example bundle");
     expect(stdout).toContain("Validated: Example profile demonstration bundle");
+    expect(stdout).toContain("Validated: PF1e profile");
+    expect(stdout).toContain("Validated: PF1e profile bundle");
   });
 });

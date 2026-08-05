@@ -1,0 +1,26 @@
+[
+  {
+    "id": "str",
+    "label": "Strength"
+  },
+  {
+    "id": "dex",
+    "label": "Dexterity"
+  },
+  {
+    "id": "con",
+    "label": "Constitution"
+  },
+  {
+    "id": "int",
+    "label": "Intelligence"
+  },
+  {
+    "id": "wis",
+    "label": "Wisdom"
+  },
+  {
+    "id": "cha",
+    "label": "Charisma"
+  }
+]

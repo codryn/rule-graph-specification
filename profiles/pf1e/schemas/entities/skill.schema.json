@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.codryn.com/crgs/profiles/pf1e/v0.1/entities/skill.schema.json",
+  "title": "PF1eSkillEntity",
+  "allOf": [
+    {
+      "$ref": "https://schemas.codryn.com/crgs/v0.2/entities/entity.schema.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "pf1e.entity.skill"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "skillKey": {
+              "enum": ["acrobatics", "knowledge-arcana"]
+            },
+            "ability": {
+              "enum": ["str", "dex", "con", "int", "wis", "cha"]
+            }
+          },
+          "required": ["skillKey", "ability"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["type", "data"]
+    }
+  ]
+}

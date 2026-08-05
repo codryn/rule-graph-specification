@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.codryn.com/crgs/profiles/pf1e/v0.1/requirements/base-attack-bonus.schema.json",
+  "title": "PF1eBaseAttackBonusRequirement",
+  "type": "object",
+  "properties": {
+    "kind": {
+      "const": "pf1e.requirement.base-attack-bonus"
+    },
+    "minimum": {
+      "type": "integer",
+      "minimum": 0
+    }
+  },
+  "required": ["kind", "minimum"],
+  "additionalProperties": false
+}

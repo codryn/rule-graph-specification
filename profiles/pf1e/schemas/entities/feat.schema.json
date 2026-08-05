@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.codryn.com/crgs/profiles/pf1e/v0.1/entities/feat.schema.json",
+  "title": "PF1eFeatEntity",
+  "allOf": [
+    {
+      "$ref": "https://schemas.codryn.com/crgs/v0.2/entities/entity.schema.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "pf1e.entity.feat"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "familyId": {
+              "type": "string",
+              "minLength": 1
+            },
+            "featTypes": {
+              "type": "array",
+              "items": {
+                "enum": ["combat", "fighter-bonus", "magic", "social"]
+              },
+              "minItems": 1,
+              "uniqueItems": true
+            },
+            "repeatable": {
+              "type": "boolean"
+            },
+            "summary": {
+              "$ref": "https://schemas.codryn.com/crgs/v0.2/common/localized-text.schema.json"
+            },
+            "parameter": {
+              "type": "object",
+              "properties": {
+                "kind": {
+                  "enum": ["weapon", "spell-school"]
+                },
+                "value": {
+                  "type": "string"
+                }
+              },
+              "required": ["kind", "value"],
+              "additionalProperties": false,
+              "allOf": [
+                {
+                  "if": {
+                    "properties": {
+                      "kind": {
+                        "const": "weapon"
+                      }
+                    },
+                    "required": ["kind"]
+                  },
+                  "then": {
+                    "properties": {
+                      "value": {
+                        "enum": ["greatsword", "longsword"]
+                      }
+                    }
+                  }
+                },
+                {
+                  "if": {
+                    "properties": {
+                      "kind": {
+                        "const": "spell-school"
+                      }
+                    },
+                    "required": ["kind"]
+                  },
+                  "then": {
+                    "properties": {
+                      "value": {
+                        "enum": ["evocation", "necromancy"]
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "required": ["familyId", "featTypes", "repeatable"],
+          "additionalProperties": false
+        }
+      },
+      "required": ["type", "data"]
+    }
+  ]
+}
