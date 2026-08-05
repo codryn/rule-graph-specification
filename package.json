@@ -8,7 +8,7 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "npm run build --workspaces --if-present",
+    "build": "npm run build --workspace @codryn/crgs-core && npm run build --workspace @codryn/crgs-runtime && npm run build --workspace @codryn/crgs-schema && npm run build --workspace @codryn/crgs-validator && npm run build --workspace @codryn/crgs-viewer && npm run build --workspace @codryn/crgs-cli",
     "ci": "node ./tools/run-ci.mjs",
     "ci:exact": "node ./tools/run-ci.mjs --exact",
     "format": "prettier --write .",
