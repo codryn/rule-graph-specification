@@ -15,7 +15,7 @@ export interface Metadata {
   attributes?: Record<string, string | number | boolean | null>;
 }
 
-export type RequirementExpression =
+export type FactRequirement =
   | {
       kind: "fact";
       fact: string;
@@ -26,12 +26,23 @@ export type RequirementExpression =
       kind: "fact";
       fact: string;
       operator: "present";
-    }
-  | {
-      kind: "group";
-      mode: "all" | "any" | "none";
-      children: RequirementExpression[];
     };
+
+export interface GroupRequirement {
+  kind: "group";
+  mode: "all" | "any" | "none";
+  children: RequirementExpression[];
+}
+
+export interface CustomRequirementExpression {
+  kind: string;
+  [key: string]: unknown;
+}
+
+export type RequirementExpression =
+  | FactRequirement
+  | GroupRequirement
+  | CustomRequirementExpression;
 
 export type Effect =
   | {
@@ -115,6 +126,41 @@ export interface EntityIndex {
   incomingRelations: Map<string, Relation[]>;
 }
 
+export interface EvaluatedRequirement {
+  requirement: string;
+  satisfied: boolean;
+  fact?: string;
+  operator?: string;
+  actualValue?: string | number | boolean;
+  expectedValue?: string | number | boolean;
+  targetId?: string;
+}
+
+export interface MissingRequirement {
+  entityId?: string;
+  fact?: string;
+}
+
+export interface EvaluationResult {
+  satisfied: boolean;
+  evaluated: EvaluatedRequirement[];
+  missing: MissingRequirement[];
+}
+
+export interface EvaluationContext {
+  facts?: Readonly<Record<string, string | number | boolean | undefined>>;
+  entityIds?: Iterable<string>;
+  entityIndex?: EntityIndex;
+  requirementEvaluators?: Readonly<
+    Record<string, RequirementEvaluator<CustomRequirementExpression>>
+  >;
+}
+
+export type RequirementEvaluator<TExpression extends CustomRequirementExpression> = (
+  expression: TExpression,
+  context: EvaluationContext
+) => EvaluationResult;
+
 export type ResolverIssueCode =
   | "DUPLICATE_ENTITY_ID"
   | "UNKNOWN_REFERENCED_ENTITY"
@@ -144,6 +190,8 @@ export class BundleResolutionError extends Error {
     this.issues = issues;
   }
 }
+
+const entityRequirementKind = "crgs.requirement.entity";
 
 const coreRequirementKinds = new Set(["fact", "group"]);
 const extensionCategoryByRegistryKey = {
@@ -257,6 +305,39 @@ export function resolveBundle(bundle: Bundle): ResolvedBundle {
   };
 }
 
+export function evaluate(
+  expression: RequirementExpression,
+  context: EvaluationContext
+): EvaluationResult {
+  if (isFactRequirement(expression)) {
+    return evaluateFactRequirement(expression, context);
+  }
+
+  if (isGroupRequirement(expression)) {
+    return evaluateGroupRequirement(expression, context);
+  }
+
+  if (expression.kind === entityRequirementKind) {
+    return evaluateEntityRequirement(expression, context);
+  }
+
+  const customEvaluator = context.requirementEvaluators?.[expression.kind];
+  if (customEvaluator) {
+    return customEvaluator(expression as CustomRequirementExpression, context);
+  }
+
+  return {
+    satisfied: false,
+    evaluated: [
+      {
+        requirement: expression.kind,
+        satisfied: false
+      }
+    ],
+    missing: []
+  };
+}
+
 function deriveProfileNamespace(profileId: string): string {
   const profileMarker = ".profile.";
   const markerIndex = profileId.indexOf(profileMarker);
@@ -267,6 +348,96 @@ function deriveProfileNamespace(profileId: string): string {
 
   const firstSeparator = profileId.indexOf(".");
   return firstSeparator > 0 ? profileId.slice(0, firstSeparator) : profileId;
+}
+
+function evaluateFactRequirement(
+  expression: FactRequirement,
+  context: EvaluationContext
+): EvaluationResult {
+  const actualValue = context.facts?.[expression.fact];
+  const satisfied =
+    expression.operator === "present"
+      ? actualValue !== undefined
+      : expression.operator === "equals"
+        ? actualValue === expression.value
+        :
+      typeof actualValue === "number" &&
+      typeof expression.value === "number" &&
+      actualValue >= expression.value;
+
+  return {
+    satisfied,
+    evaluated: [
+      {
+        requirement: "crgs.requirement.fact",
+        fact: expression.fact,
+        operator: expression.operator,
+        actualValue,
+        expectedValue: "value" in expression ? expression.value : undefined,
+        satisfied
+      }
+    ],
+    missing: satisfied
+      ? []
+      : actualValue === undefined
+        ? [{ fact: expression.fact }]
+        : []
+  };
+}
+
+function isFactRequirement(expression: RequirementExpression): expression is FactRequirement {
+  return expression.kind === "fact";
+}
+
+function isGroupRequirement(
+  expression: RequirementExpression
+): expression is GroupRequirement {
+  return expression.kind === "group";
+}
+
+function evaluateGroupRequirement(
+  expression: GroupRequirement,
+  context: EvaluationContext
+): EvaluationResult {
+  const childResults = expression.children.map((child) => evaluate(child, context));
+  const childSatisfied = childResults.map((result) => result.satisfied);
+
+  const satisfied =
+    expression.mode === "all"
+      ? childSatisfied.every(Boolean)
+      : expression.mode === "any"
+        ? childSatisfied.some(Boolean)
+        : childSatisfied.every((value) => !value);
+
+  return {
+    satisfied,
+    evaluated: childResults.flatMap((result) => result.evaluated),
+    missing: childResults.flatMap((result) => result.missing)
+  };
+}
+
+function evaluateEntityRequirement(
+  expression: CustomRequirementExpression,
+  context: EvaluationContext
+): EvaluationResult {
+  const targetId = typeof expression.targetId === "string" ? expression.targetId : undefined;
+  const activeEntityIds = new Set(context.entityIds ?? []);
+  const isActive = targetId !== undefined && activeEntityIds.has(targetId);
+  const existsInIndex =
+    targetId !== undefined ? context.entityIndex?.byId.has(targetId) ?? false : false;
+  const satisfied = Boolean(targetId) && (isActive || existsInIndex);
+
+  return {
+    satisfied,
+    evaluated: [
+      {
+        requirement: entityRequirementKind,
+        targetId,
+        satisfied
+      }
+    ],
+    missing: satisfied || targetId === undefined ? [] : [{ entityId: targetId }]
+  };
 }
 
 function validateProfileRegistrations(
