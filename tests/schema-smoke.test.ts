@@ -16,6 +16,9 @@ describe("schema validation", () => {
       }
     );
 
+    expect(stdout).toContain("Schema valid example accepted: Entity");
+    expect(stdout).toContain("Schema invalid example rejected: Bundle");
+    expect(stdout).toContain("Schema valid example accepted: ProfileManifest");
     expect(stdout).toContain("Validated: Example profile");
     expect(stdout).toContain("Validated: Minimal example bundle");
     expect(stdout).toContain("Validated: Advanced example bundle");

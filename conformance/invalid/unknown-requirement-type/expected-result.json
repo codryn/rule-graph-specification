@@ -1,0 +1,10 @@
+{
+  "valid": false,
+  "errors": [
+    {
+      "code": "CRGS_UNKNOWN_REQUIREMENT_TYPE",
+      "path": "/entities/0/requirements/kind",
+      "reference": "example.requirement.missing"
+    }
+  ]
+}

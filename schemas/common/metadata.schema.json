@@ -1,7 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://crgs.dev/schema/common/metadata.schema.json",
+  "$id": "https://schemas.codryn.com/crgs/v0.1/common/metadata.schema.json",
   "title": "Metadata",
+  "description": "Bounded non-semantic annotations for indexing, tooling, provenance, and classification.",
   "type": "object",
   "properties": {
     "tags": {
@@ -22,5 +23,15 @@
       }
     }
   },
-  "additionalProperties": false
+  "required": [],
+  "additionalProperties": false,
+  "examples": [
+    {
+      "tags": ["example", "minimal"],
+      "attributes": {
+        "reviewed": true,
+        "source.kind": "demonstration"
+      }
+    }
+  ]
 }

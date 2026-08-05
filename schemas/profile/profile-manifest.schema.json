@@ -1,0 +1,176 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.codryn.com/crgs/v0.1/profile/profile-manifest.schema.json",
+  "title": "ProfileManifest",
+  "description": "Profile declaration that registers extension identifiers, their validator schema URIs, and any dependent profiles layered on top of a specific CRGS version.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._:-]*$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "specVersion": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1
+    },
+    "dependencies": {
+      "type": "array",
+      "items": {
+        "$ref": "https://schemas.codryn.com/crgs/v0.1/profile/profile-dependency.schema.json"
+      },
+      "uniqueItems": true
+    },
+    "extensions": {
+      "type": "object",
+      "properties": {
+        "entityTypes": {
+          "type": "array",
+          "items": {
+            "allOf": [
+              {
+                "$ref": "https://schemas.codryn.com/crgs/v0.1/profile/extension-registration.schema.json"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "pattern": "^[a-z0-9]+(?:\\.[a-z0-9][a-z0-9-]*)*\\.entity\\.[a-z0-9][a-z0-9-]*$"
+                  }
+                }
+              }
+            ]
+          },
+          "uniqueItems": true
+        },
+        "requirementTypes": {
+          "type": "array",
+          "items": {
+            "allOf": [
+              {
+                "$ref": "https://schemas.codryn.com/crgs/v0.1/profile/extension-registration.schema.json"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "pattern": "^[a-z0-9]+(?:\\.[a-z0-9][a-z0-9-]*)*\\.requirement\\.[a-z0-9][a-z0-9-]*$"
+                  }
+                }
+              }
+            ]
+          },
+          "uniqueItems": true
+        },
+        "effectTypes": {
+          "type": "array",
+          "items": {
+            "allOf": [
+              {
+                "$ref": "https://schemas.codryn.com/crgs/v0.1/profile/extension-registration.schema.json"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "pattern": "^[a-z0-9]+(?:\\.[a-z0-9][a-z0-9-]*)*\\.effect\\.[a-z0-9][a-z0-9-]*$"
+                  }
+                }
+              }
+            ]
+          },
+          "uniqueItems": true
+        },
+        "relationTypes": {
+          "type": "array",
+          "items": {
+            "allOf": [
+              {
+                "$ref": "https://schemas.codryn.com/crgs/v0.1/profile/extension-registration.schema.json"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "pattern": "^[a-z0-9]+(?:\\.[a-z0-9][a-z0-9-]*)*\\.relation\\.[a-z0-9][a-z0-9-]*$"
+                  }
+                }
+              }
+            ]
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  "required": ["id", "name", "version", "specVersion", "extensions"],
+  "additionalProperties": false,
+  "examples": [
+    {
+      "id": "example-rpg",
+      "name": "Example RPG",
+      "version": "0.1.0",
+      "specVersion": "0.1.0",
+      "description": "A minimal demonstration profile used to verify CRGS repository architecture.",
+      "extensions": {
+        "entityTypes": [
+          {
+            "id": "example.entity.trait",
+            "schema": "https://schemas.codryn.com/crgs/profiles/example/v0.1/entities/trait.schema.json"
+          },
+          {
+            "id": "example.entity.selection",
+            "schema": "https://schemas.codryn.com/crgs/profiles/example/v0.1/entities/selection.schema.json"
+          }
+        ],
+        "requirementTypes": [
+          {
+            "id": "example.requirement.attribute-rating",
+            "schema": "https://schemas.codryn.com/crgs/profiles/example/v0.1/requirements/attribute-rating.schema.json"
+          },
+          {
+            "id": "example.requirement.skill-rating",
+            "schema": "https://schemas.codryn.com/crgs/profiles/example/v0.1/requirements/skill-rating.schema.json"
+          }
+        ],
+        "effectTypes": [
+          {
+            "id": "example.effect.grant",
+            "schema": "https://schemas.codryn.com/crgs/profiles/example/v0.1/effects/grant.schema.json"
+          },
+          {
+            "id": "example.effect.increase",
+            "schema": "https://schemas.codryn.com/crgs/profiles/example/v0.1/effects/increase.schema.json"
+          }
+        ],
+        "relationTypes": [
+          {
+            "id": "example.relation.grants",
+            "schema": "https://schemas.codryn.com/crgs/profiles/example/v0.1/relations/grants.schema.json"
+          },
+          {
+            "id": "example.relation.depends-on",
+            "schema": "https://schemas.codryn.com/crgs/profiles/example/v0.1/relations/depends-on.schema.json"
+          }
+        ]
+      }
+    }
+  ]
+}

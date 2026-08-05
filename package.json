@@ -8,17 +8,23 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "npm run build --workspaces --if-present",
+    "build": "npm run build --workspace @codryn/crgs-core && npm run build --workspace @codryn/crgs-runtime && npm run build --workspace @codryn/crgs-schema && npm run build --workspace @codryn/crgs-validator && npm run build --workspace @codryn/crgs-viewer && npm run build --workspace @codryn/crgs-cli",
+    "ci": "node ./tools/run-ci.mjs",
+    "ci:exact": "node ./tools/run-ci.mjs --exact",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "npm run lint:markdown && npm run lint:code",
     "lint:code": "eslint .",
     "lint:markdown": "markdownlint-cli2 \"**/*.md\" \"#node_modules\"",
     "test": "vitest run",
-    "validate": "node ./tools/validate-schemas.mjs"
+    "test:conformance": "npm exec vitest run tests/conformance.test.ts",
+    "validate": "npm run validate:repo",
+    "validate:repo": "npm run validate:schemas && npm run lint && npm run test && npm run build",
+    "validate:schemas": "node ./tools/validate-schemas.mjs"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@types/node": "^24.3.0",
     "ajv": "^8.17.1",
     "ajv-formats": "^3.0.1",
     "eslint": "^10.8.0",

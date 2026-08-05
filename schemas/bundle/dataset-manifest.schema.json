@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.codryn.com/crgs/v0.1/bundle/dataset-manifest.schema.json",
+  "title": "DatasetManifest",
+  "description": "Dataset identification and versioning metadata for a CRGS bundle.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._:-]*$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "datasetVersion": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "description": {
+      "type": "string"
+    }
+  },
+  "required": ["id", "title", "datasetVersion"],
+  "additionalProperties": false,
+  "examples": [
+    {
+      "id": "example-rpg.minimal",
+      "title": "Example RPG Minimal Bundle",
+      "datasetVersion": "0.1.0",
+      "description": "A tiny demonstration bundle for CRGS validation."
+    }
+  ]
+}

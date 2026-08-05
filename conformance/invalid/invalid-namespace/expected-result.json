@@ -1,0 +1,10 @@
+{
+  "valid": false,
+  "errors": [
+    {
+      "code": "CRGS_INVALID_PROFILE_NAMESPACE",
+      "path": "/entities/0/type",
+      "reference": "other.entity.ability"
+    }
+  ]
+}

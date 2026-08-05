@@ -13,7 +13,7 @@ An Entity is a typed node with an identifier and a human-facing label. It may al
 ```json
 {
   "id": "feature.adaptable",
-  "type": "trait",
+  "type": "example.entity.trait",
   "label": {
     "default": "Adaptable"
   }

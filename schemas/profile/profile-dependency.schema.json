@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.codryn.com/crgs/v0.1/profile/profile-dependency.schema.json",
+  "title": "ProfileDependency",
+  "description": "Reference to another profile whose extension registry is imported into the active validator context.",
+  "type": "object",
+  "properties": {
+    "profileId": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._:-]*$"
+    },
+    "versionRange": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": ["profileId", "versionRange"],
+  "additionalProperties": false,
+  "examples": [
+    {
+      "profileId": "codryn.base.common",
+      "versionRange": "^1.0.0"
+    }
+  ]
+}

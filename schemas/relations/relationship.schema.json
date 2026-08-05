@@ -1,7 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://crgs.dev/schema/relations/relationship.schema.json",
+  "$id": "https://schemas.codryn.com/crgs/v0.1/relations/relationship.schema.json",
   "title": "Relationship",
+  "description": "Typed directed edge that connects one entity identifier to another.",
   "type": "object",
   "properties": {
     "id": {
@@ -21,9 +22,17 @@
       "pattern": "^[a-z0-9][a-z0-9._:-]*$"
     },
     "metadata": {
-      "$ref": "https://crgs.dev/schema/common/metadata.schema.json"
+      "$ref": "https://schemas.codryn.com/crgs/v0.1/common/metadata.schema.json"
     }
   },
   "required": ["id", "type", "from", "to"],
-  "additionalProperties": false
+  "additionalProperties": false,
+  "examples": [
+    {
+      "id": "rel.human-grants-adaptable",
+      "type": "example.relation.grants",
+      "from": "ancestry.human",
+      "to": "feature.adaptable"
+    }
+  ]
 }

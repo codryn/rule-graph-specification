@@ -1,76 +1,49 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://crgs.dev/schema/requirements/requirement-expression.schema.json",
+  "$id": "https://schemas.codryn.com/crgs/v0.1/requirements/requirement-expression.schema.json",
   "title": "RequirementExpression",
-  "$defs": {
-    "fact": {
-      "oneOf": [
-        {
-          "type": "object",
-          "properties": {
-            "kind": {
-              "const": "fact"
-            },
-            "fact": {
-              "type": "string",
-              "minLength": 1
-            },
-            "operator": {
-              "const": "present"
-            }
-          },
-          "required": ["kind", "fact", "operator"],
-          "additionalProperties": false
-        },
-        {
-          "type": "object",
-          "properties": {
-            "kind": {
-              "const": "fact"
-            },
-            "fact": {
-              "type": "string",
-              "minLength": 1
-            },
-            "operator": {
-              "enum": ["equals", "atLeast"]
-            },
-            "value": {
-              "type": ["string", "number", "integer", "boolean"]
-            }
-          },
-          "required": ["kind", "fact", "operator", "value"],
-          "additionalProperties": false
-        }
-      ]
+  "description": "Declarative predicate tree composed of atomic fact requirements and logical requirement groups.",
+  "type": "object",
+  "required": ["kind"],
+  "unevaluatedProperties": false,
+  "oneOf": [
+    {
+      "$ref": "https://schemas.codryn.com/crgs/v0.1/requirements/atomic-requirement.schema.json"
     },
-    "group": {
+    {
+      "$ref": "https://schemas.codryn.com/crgs/v0.1/requirements/requirement-group.schema.json"
+    },
+    {
       "type": "object",
       "properties": {
         "kind": {
-          "const": "group"
-        },
-        "mode": {
-          "enum": ["all", "any", "none"]
-        },
-        "children": {
-          "type": "array",
-          "items": {
-            "$ref": "#"
-          },
-          "minItems": 1
+          "type": "string",
+          "not": {
+            "enum": ["fact", "group"]
+          }
         }
       },
-      "required": ["kind", "mode", "children"],
-      "additionalProperties": false
+      "required": ["kind"],
+      "additionalProperties": true
     }
-  },
-  "oneOf": [
+  ],
+  "examples": [
     {
-      "$ref": "#/$defs/fact"
-    },
-    {
-      "$ref": "#/$defs/group"
+      "kind": "group",
+      "mode": "all",
+      "children": [
+        {
+          "kind": "fact",
+          "fact": "selected:ancestry",
+          "operator": "equals",
+          "value": "ancestry.human"
+        },
+        {
+          "kind": "fact",
+          "fact": "profile:demo-mode",
+          "operator": "present"
+        }
+      ]
     }
   ]
 }

@@ -1,7 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://crgs.dev/schema/bundle/bundle.schema.json",
+  "$id": "https://schemas.codryn.com/crgs/v0.1/bundle/bundle.schema.json",
   "title": "Bundle",
+  "description": "Transport unit containing dataset identity, profile declaration, entities, relations, and optional metadata.",
   "type": "object",
   "properties": {
     "specVersion": {
@@ -9,25 +10,25 @@
       "pattern": "^\\d+\\.\\d+\\.\\d+$"
     },
     "manifest": {
-      "$ref": "https://crgs.dev/schema/bundle/manifest.schema.json"
+      "$ref": "https://schemas.codryn.com/crgs/v0.1/bundle/dataset-manifest.schema.json"
     },
     "profile": {
-      "$ref": "https://crgs.dev/schema/profile/profile.schema.json"
+      "$ref": "https://schemas.codryn.com/crgs/v0.1/profile/profile-manifest.schema.json"
     },
     "entities": {
       "type": "array",
       "items": {
-        "$ref": "https://crgs.dev/schema/entities/entity.schema.json"
+        "$ref": "https://schemas.codryn.com/crgs/v0.1/entities/entity.schema.json"
       }
     },
     "relationships": {
       "type": "array",
       "items": {
-        "$ref": "https://crgs.dev/schema/relations/relationship.schema.json"
+        "$ref": "https://schemas.codryn.com/crgs/v0.1/relations/relation.schema.json"
       }
     },
     "metadata": {
-      "$ref": "https://crgs.dev/schema/common/metadata.schema.json"
+      "$ref": "https://schemas.codryn.com/crgs/v0.1/common/metadata.schema.json"
     }
   },
   "required": [
@@ -37,5 +38,64 @@
     "entities",
     "relationships"
   ],
-  "additionalProperties": false
+  "additionalProperties": false,
+  "examples": [
+    {
+      "specVersion": "0.1.0",
+      "manifest": {
+        "id": "example-rpg.minimal",
+        "title": "Example RPG Minimal Bundle",
+        "datasetVersion": "0.1.0"
+      },
+      "profile": {
+        "id": "example-rpg",
+        "name": "Example RPG",
+        "version": "0.1.0",
+        "specVersion": "0.1.0",
+        "extensions": {
+          "entityTypes": [
+            {
+              "id": "example.entity.trait",
+              "schema": "https://schemas.codryn.com/crgs/profiles/example/v0.1/entities/trait.schema.json"
+            }
+          ],
+          "requirementTypes": [
+            {
+              "id": "example.requirement.attribute-rating",
+              "schema": "https://schemas.codryn.com/crgs/profiles/example/v0.1/requirements/attribute-rating.schema.json"
+            }
+          ],
+          "effectTypes": [
+            {
+              "id": "example.effect.grant",
+              "schema": "https://schemas.codryn.com/crgs/profiles/example/v0.1/effects/grant.schema.json"
+            }
+          ],
+          "relationTypes": [
+            {
+              "id": "example.relation.grants",
+              "schema": "https://schemas.codryn.com/crgs/profiles/example/v0.1/relations/grants.schema.json"
+            }
+          ]
+        }
+      },
+      "entities": [
+        {
+          "id": "ancestry.human",
+          "type": "example.entity.trait",
+          "label": {
+            "default": "Human"
+          }
+        }
+      ],
+      "relationships": [
+        {
+          "id": "rel.human-grants-adaptable",
+          "type": "example.relation.grants",
+          "from": "ancestry.human",
+          "to": "feature.adaptable"
+        }
+      ]
+    }
+  ]
 }

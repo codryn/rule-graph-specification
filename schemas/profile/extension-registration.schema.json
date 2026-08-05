@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.codryn.com/crgs/v0.1/profile/extension-registration.schema.json",
+  "title": "ExtensionRegistration",
+  "description": "Registration entry that binds a profile-owned extension identifier to the schema URI validators must load for that extension.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:\\.[a-z0-9][a-z0-9-]*){2,}$"
+    },
+    "schema": {
+      "type": "string",
+      "format": "uri"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": ["id", "schema"],
+  "additionalProperties": false,
+  "examples": [
+    {
+      "id": "example.entity.ability",
+      "schema": "https://schemas.codryn.com/crgs/profiles/example/v0.1/entities/ability.schema.json",
+      "description": "Entity type for abilities declared by the example profile."
+    }
+  ]
+}

@@ -1,7 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://crgs.dev/schema/common/localized-text.schema.json",
+  "$id": "https://schemas.codryn.com/crgs/v0.1/common/localized-text.schema.json",
   "title": "LocalizedText",
+  "description": "Language-aware text with a required default rendering and optional locale-specific translations.",
   "type": "object",
   "properties": {
     "default": {
@@ -20,5 +21,13 @@
     }
   },
   "required": ["default"],
-  "additionalProperties": false
+  "additionalProperties": false,
+  "examples": [
+    {
+      "default": "Human",
+      "translations": {
+        "fr": "Humain"
+      }
+    }
+  ]
 }

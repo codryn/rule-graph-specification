@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.codryn.com/crgs/v0.1/relations/relation.schema.json",
+  "title": "Relation",
+  "description": "Typed directed edge that connects one entity identifier to another.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._:-]*$"
+    },
+    "type": {
+      "type": "string",
+      "minLength": 1
+    },
+    "from": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._:-]*$"
+    },
+    "to": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._:-]*$"
+    },
+    "metadata": {
+      "$ref": "https://schemas.codryn.com/crgs/v0.1/common/metadata.schema.json"
+    }
+  },
+  "required": ["id", "type", "from", "to"],
+  "additionalProperties": false,
+  "examples": [
+    {
+      "id": "rel.human-grants-adaptable",
+      "type": "example.relation.grants",
+      "from": "ancestry.human",
+      "to": "feature.adaptable"
+    }
+  ]
+}
