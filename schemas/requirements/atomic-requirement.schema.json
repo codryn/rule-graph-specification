@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://crgs.dev/schema/requirements/atomic-requirement.schema.json",
+  "title": "AtomicRequirement",
+  "description": "Single fact predicate that can test for presence or compare a fact value.",
+  "type": "object",
+  "required": ["kind", "fact", "operator"],
+  "unevaluatedProperties": false,
+  "oneOf": [
+    {
+      "properties": {
+        "kind": {
+          "const": "fact"
+        },
+        "fact": {
+          "type": "string",
+          "minLength": 1
+        },
+        "operator": {
+          "const": "present"
+        }
+      },
+      "required": ["kind", "fact", "operator"],
+      "additionalProperties": false
+    },
+    {
+      "properties": {
+        "kind": {
+          "const": "fact"
+        },
+        "fact": {
+          "type": "string",
+          "minLength": 1
+        },
+        "operator": {
+          "enum": ["equals", "atLeast"]
+        },
+        "value": {
+          "type": ["string", "number", "integer", "boolean"]
+        }
+      },
+      "required": ["kind", "fact", "operator", "value"],
+      "additionalProperties": false
+    }
+  ],
+  "examples": [
+    {
+      "kind": "fact",
+      "fact": "selected:ancestry",
+      "operator": "equals",
+      "value": "ancestry.human"
+    }
+  ]
+}

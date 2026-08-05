@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://crgs.dev/schema/requirements/requirement-group.schema.json",
+  "title": "RequirementGroup",
+  "description": "Logical composition of one or more child requirement expressions.",
+  "type": "object",
+  "properties": {
+    "kind": {
+      "const": "group"
+    },
+    "mode": {
+      "enum": ["all", "any", "none"]
+    },
+    "children": {
+      "type": "array",
+      "items": {
+        "$ref": "https://crgs.dev/schema/requirements/requirement-expression.schema.json"
+      },
+      "minItems": 1
+    }
+  },
+  "required": ["kind", "mode", "children"],
+  "additionalProperties": false,
+  "examples": [
+    {
+      "kind": "group",
+      "mode": "all",
+      "children": [
+        {
+          "kind": "fact",
+          "fact": "selected:ancestry",
+          "operator": "equals",
+          "value": "ancestry.human"
+        },
+        {
+          "kind": "fact",
+          "fact": "profile:demo-mode",
+          "operator": "present"
+        }
+      ]
+    }
+  ]
+}

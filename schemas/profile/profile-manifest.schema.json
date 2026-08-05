@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://crgs.dev/schema/profile/profile-manifest.schema.json",
+  "title": "ProfileManifest",
+  "description": "Profile declaration that identifies the extension vocabularies layered on top of a specific CRGS version.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._:-]*$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "specVersion": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1
+    },
+    "extensions": {
+      "type": "object",
+      "properties": {
+        "entityTypes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "requirementTypes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "effectTypes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "relationshipTypes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        }
+      },
+      "required": [],
+      "additionalProperties": false
+    }
+  },
+  "required": ["id", "name", "version", "specVersion", "extensions"],
+  "additionalProperties": false,
+  "examples": [
+    {
+      "id": "example-rpg",
+      "name": "Example RPG",
+      "version": "0.1.0",
+      "specVersion": "0.1.0",
+      "description": "A minimal demonstration profile used to verify CRGS repository architecture.",
+      "extensions": {
+        "entityTypes": ["trait", "selection"],
+        "requirementTypes": ["fact", "group"],
+        "effectTypes": ["grant", "increase"],
+        "relationshipTypes": ["grants", "depends-on"]
+      }
+    }
+  ]
+}
