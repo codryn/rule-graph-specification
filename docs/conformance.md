@@ -43,6 +43,6 @@ Reference validators should distinguish between:
 - duplicate registry identifiers across profile dependencies
 - non-fatal warnings for metadata or optional conventions
 
-## Version 0.1 Note
+## Version 0.2 Note
 
-CRGS 0.1 establishes conformance structure and repository validation, but not yet a complete conformance test suite.
+CRGS 0.2 establishes conformance structure, repository validation, and an executable reference conformance suite, but it still stops short of a full game-system profile library.

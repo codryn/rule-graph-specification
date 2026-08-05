@@ -66,9 +66,9 @@ const repoRoot = resolve(__dirname, "..", "..", "..");
 const schemaDir = join(repoRoot, "schemas");
 const packageJsonPath = join(repoRoot, "packages", "crgs-cli", "package.json");
 const bundleSchemaId =
-  "https://schemas.codryn.com/crgs/v0.1/bundle/bundle.schema.json";
+  "https://schemas.codryn.com/crgs/v0.2/bundle/bundle.schema.json";
 const profileSchemaId =
-  "https://schemas.codryn.com/crgs/v0.1/profile/profile.schema.json";
+  "https://schemas.codryn.com/crgs/v0.2/profile/profile.schema.json";
 const Ajv2020 = Ajv2020Module as unknown as new (options: {
   allErrors: boolean;
   strict: boolean;

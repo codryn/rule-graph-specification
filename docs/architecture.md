@@ -48,4 +48,4 @@ flowchart LR
 
 ## Stability Strategy
 
-Version 0.1 establishes the boundaries. Later work should refine semantics by extending schemas and documents incrementally rather than collapsing layers or embedding profile logic into the core.
+Version 0.2 establishes the current boundaries. Later work should refine semantics by extending schemas and documents incrementally rather than collapsing layers or embedding profile logic into the core.

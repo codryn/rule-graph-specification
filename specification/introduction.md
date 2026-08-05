@@ -15,7 +15,7 @@ CRGS defines:
 - an extension model based on profiles
 - versioning and conformance expectations
 
-CRGS does not define a complete ontology for any single game system in version 0.1.
+CRGS does not define a complete ontology for any single game system in version 0.2.
 
 ## Non-Goals
 

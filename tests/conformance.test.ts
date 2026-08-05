@@ -17,7 +17,7 @@ const rootDir = resolve(__dirname, "..");
 const schemaDir = join(rootDir, "schemas");
 const conformanceDir = join(rootDir, "conformance");
 const bundleSchemaId =
-  "https://schemas.codryn.com/crgs/v0.1/bundle/bundle.schema.json";
+  "https://schemas.codryn.com/crgs/v0.2/bundle/bundle.schema.json";
 
 interface ConformanceError {
   code: string;

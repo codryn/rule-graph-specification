@@ -6,7 +6,7 @@ Rules content must express consequences such as grants, numeric adjustments, and
 
 ## Definition
 
-An Effect describes a typed operation applied to a target. Version 0.1 supports value-based and formula-based representations.
+An Effect describes a typed operation applied to a target. Version 0.2 supports value-based and formula-based representations.
 
 ## Example
 

@@ -6,7 +6,7 @@ Rules data needs a declarative way to describe eligibility, prerequisites, or ap
 
 ## Definition
 
-Version 0.1 defines `RequirementExpression` as either:
+Version 0.2 defines `RequirementExpression` as either:
 
 - a fact predicate
 - a logical group of child expressions
