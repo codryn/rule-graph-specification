@@ -2,6 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://crgs.dev/schema/entities/entity.schema.json",
   "title": "Entity",
+  "description": "Typed graph node representing an addressable rule concept such as a trait, capability, or selection.",
   "type": "object",
   "properties": {
     "id": {
@@ -32,5 +33,20 @@
     }
   },
   "required": ["id", "type", "label"],
-  "additionalProperties": false
+  "additionalProperties": false,
+  "examples": [
+    {
+      "id": "feature.adaptable",
+      "type": "trait",
+      "label": {
+        "default": "Adaptable"
+      },
+      "requirements": {
+        "kind": "fact",
+        "fact": "selected:ancestry",
+        "operator": "equals",
+        "value": "ancestry.human"
+      }
+    }
+  ]
 }

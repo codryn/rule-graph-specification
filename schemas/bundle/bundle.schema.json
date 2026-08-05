@@ -2,6 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://crgs.dev/schema/bundle/bundle.schema.json",
   "title": "Bundle",
+  "description": "Transport unit containing dataset identity, profile declaration, entities, relations, and optional metadata.",
   "type": "object",
   "properties": {
     "specVersion": {
@@ -9,10 +10,10 @@
       "pattern": "^\\d+\\.\\d+\\.\\d+$"
     },
     "manifest": {
-      "$ref": "https://crgs.dev/schema/bundle/manifest.schema.json"
+      "$ref": "https://crgs.dev/schema/bundle/dataset-manifest.schema.json"
     },
     "profile": {
-      "$ref": "https://crgs.dev/schema/profile/profile.schema.json"
+      "$ref": "https://crgs.dev/schema/profile/profile-manifest.schema.json"
     },
     "entities": {
       "type": "array",
@@ -23,7 +24,7 @@
     "relationships": {
       "type": "array",
       "items": {
-        "$ref": "https://crgs.dev/schema/relations/relationship.schema.json"
+        "$ref": "https://crgs.dev/schema/relations/relation.schema.json"
       }
     },
     "metadata": {
@@ -37,5 +38,44 @@
     "entities",
     "relationships"
   ],
-  "additionalProperties": false
+  "additionalProperties": false,
+  "examples": [
+    {
+      "specVersion": "0.1.0",
+      "manifest": {
+        "id": "example-rpg.minimal",
+        "title": "Example RPG Minimal Bundle",
+        "datasetVersion": "0.1.0"
+      },
+      "profile": {
+        "id": "example-rpg",
+        "name": "Example RPG",
+        "version": "0.1.0",
+        "specVersion": "0.1.0",
+        "extensions": {
+          "entityTypes": ["trait", "selection"],
+          "requirementTypes": ["fact", "group"],
+          "effectTypes": ["grant", "increase"],
+          "relationshipTypes": ["grants", "depends-on"]
+        }
+      },
+      "entities": [
+        {
+          "id": "ancestry.human",
+          "type": "trait",
+          "label": {
+            "default": "Human"
+          }
+        }
+      ],
+      "relationships": [
+        {
+          "id": "rel.human-grants-adaptable",
+          "type": "grants",
+          "from": "ancestry.human",
+          "to": "feature.adaptable"
+        }
+      ]
+    }
+  ]
 }

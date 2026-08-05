@@ -2,6 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://crgs.dev/schema/common/source-reference.schema.json",
   "title": "SourceReference",
+  "description": "Structured provenance metadata that records the origin of a rule statement or graph element.",
   "type": "object",
   "properties": {
     "title": {
@@ -21,5 +22,13 @@
     }
   },
   "required": ["title", "citation"],
-  "additionalProperties": false
+  "additionalProperties": false,
+  "examples": [
+    {
+      "title": "Core Rulebook",
+      "citation": "Core Rulebook, p. 42",
+      "locator": "p. 42",
+      "url": "https://example.com/rules/core-rulebook"
+    }
+  ]
 }

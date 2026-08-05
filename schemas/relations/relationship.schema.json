@@ -2,6 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://crgs.dev/schema/relations/relationship.schema.json",
   "title": "Relationship",
+  "description": "Typed directed edge that connects one entity identifier to another.",
   "type": "object",
   "properties": {
     "id": {
@@ -25,5 +26,13 @@
     }
   },
   "required": ["id", "type", "from", "to"],
-  "additionalProperties": false
+  "additionalProperties": false,
+  "examples": [
+    {
+      "id": "rel.human-grants-adaptable",
+      "type": "grants",
+      "from": "ancestry.human",
+      "to": "feature.adaptable"
+    }
+  ]
 }

@@ -2,6 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://crgs.dev/schema/profile/profile.schema.json",
   "title": "Profile",
+  "description": "Profile declaration that identifies the extension vocabularies layered on top of a specific CRGS version.",
   "type": "object",
   "properties": {
     "id": {
@@ -60,9 +61,25 @@
           "uniqueItems": true
         }
       },
+      "required": [],
       "additionalProperties": false
     }
   },
   "required": ["id", "name", "version", "specVersion", "extensions"],
-  "additionalProperties": false
+  "additionalProperties": false,
+  "examples": [
+    {
+      "id": "example-rpg",
+      "name": "Example RPG",
+      "version": "0.1.0",
+      "specVersion": "0.1.0",
+      "description": "A minimal demonstration profile used to verify CRGS repository architecture.",
+      "extensions": {
+        "entityTypes": ["trait", "selection"],
+        "requirementTypes": ["fact", "group"],
+        "effectTypes": ["grant", "increase"],
+        "relationshipTypes": ["grants", "depends-on"]
+      }
+    }
+  ]
 }
