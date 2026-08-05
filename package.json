@@ -9,6 +9,8 @@
   ],
   "scripts": {
     "build": "npm run build --workspaces --if-present",
+    "ci": "node ./tools/run-ci.mjs",
+    "ci:exact": "node ./tools/run-ci.mjs --exact",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "npm run lint:markdown && npm run lint:code",

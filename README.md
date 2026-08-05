@@ -51,9 +51,15 @@ This repository uses Node.js tooling for validation and project checks.
 ```bash
 npm install
 npm run validate
+npm run ci
+npm run ci:exact
 ```
 
 `npm run validate` runs the full local repository check: schema validation, linting, tests, and workspace builds.
+
+`npm run ci` runs the same repository checks as the GitHub Actions workflow without reinstalling dependencies first. It is the recommended pre-push command for local use.
+
+`npm run ci:exact` mirrors the current GitHub Actions CI job order exactly: `npm ci`, `npm run format:check`, `npm run lint`, `npm run validate`, `npm test`, and `npm run build`.
 
 The CLI can run the same repository-wide validation pipeline:
 
