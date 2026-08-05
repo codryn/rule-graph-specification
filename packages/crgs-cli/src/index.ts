@@ -1,6 +1,12 @@
 #!/usr/bin/env node
 
-import { mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
+ import {
+  mkdirSync,
+  readFileSync,
+  readdirSync,
+  realpathSync,
+  writeFileSync
+} from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import Ajv2020Module, { type ErrorObject } from "ajv/dist/2020.js";
@@ -57,6 +63,7 @@ interface AjvLike {
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(__dirname, "..", "..", "..");
 const schemaDir = join(repoRoot, "schemas");
+const packageJsonPath = join(repoRoot, "packages", "crgs-cli", "package.json");
 const bundleSchemaId = "https://schemas.codryn.com/crgs/v0.1/bundle/bundle.schema.json";
 const profileSchemaId = "https://schemas.codryn.com/crgs/v0.1/profile/profile.schema.json";
 const Ajv2020 = Ajv2020Module as unknown as new (options: {
@@ -65,6 +72,7 @@ const Ajv2020 = Ajv2020Module as unknown as new (options: {
   allowUnionTypes: boolean;
 }) => AjvLike;
 const addFormats = addFormatsModule as unknown as (instance: AjvLike) => void;
+const cliVersion = readVersion();
 
 export const commands: CliCommandDescriptor[] = [
   {
@@ -90,6 +98,21 @@ const ajv = createAjv();
 export async function main(argv: string[]): Promise<number> {
   const [command, ...rest] = argv;
 
+  if (command === undefined) {
+    printHelp();
+    return 1;
+  }
+
+  if (command === "--help" || command === "-h" || command === "help") {
+    printHelp();
+    return 0;
+  }
+
+  if (command === "--version" || command === "-v" || command === "version") {
+    writeLine(cliVersion);
+    return 0;
+  }
+
   switch (command) {
     case "validate":
       return runValidateCommand(rest);
@@ -99,12 +122,9 @@ export async function main(argv: string[]): Promise<number> {
       return runGraphCommand(rest);
     case "evaluate":
       return runEvaluateCommand(rest);
-    case undefined:
-      printHelp();
-      return 1;
     default:
-      console.error(`Unknown command: ${command}`);
-      printHelp();
+      writeLine(`Unknown command: ${command}`, true);
+      writeLine("Run 'crgs --help' to see available commands.", true);
       return 1;
   }
 }
@@ -316,6 +336,13 @@ function createAjv(): AjvLike {
   }
 
   return instance;
+}
+
+function readVersion(): string {
+  const packageMetadata = readJson(packageJsonPath) as { version?: unknown };
+  return typeof packageMetadata.version === "string"
+    ? packageMetadata.version
+    : "0.0.0";
 }
 
 function collectJsonFiles(directory: string, files: string[] = []): string[] {
@@ -534,10 +561,23 @@ function readOption(args: string[], name: string): string | undefined {
 }
 
 function printHelp(): void {
-  console.error("Usage: crgs <command> [options]");
+  writeLine(`crgs ${cliVersion}`);
+  writeLine("");
+  writeLine("Usage: crgs <command> [options]");
+  writeLine("");
+  writeLine("Commands:");
   for (const command of commands) {
-    console.error(`  ${command.name.padEnd(8)} ${command.summary}`);
+    writeLine(`  ${command.name.padEnd(8)} ${command.summary}`);
   }
+  writeLine("");
+  writeLine("Options:");
+  writeLine("  -h, --help     Show CLI usage.");
+  writeLine("  -v, --version  Print CLI version.");
+}
+
+function writeLine(message: string, toStdErr = false): void {
+  const stream = toStdErr ? process.stderr : process.stdout;
+  stream.write(`${message}\n`);
 }
 
 function mapCommandError(error: unknown): CliValidationIssue[] {
@@ -574,7 +614,10 @@ class CliCommandError extends Error {
   }
 }
 
-if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+if (
+  process.argv[1] &&
+  realpathSync(resolve(process.argv[1])) === realpathSync(fileURLToPath(import.meta.url))
+) {
   void main(process.argv.slice(2)).then((code) => {
     process.exitCode = code;
   });

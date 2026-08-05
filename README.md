@@ -55,6 +55,83 @@ npm run validate
 
 `npm run validate` runs the full local repository check: schema validation, linting, tests, and workspace builds.
 
+The conformance suite also has a dedicated entrypoint:
+
+```bash
+npm run test:conformance
+```
+
+## CLI
+
+The workspace includes a CRGS CLI package with a `crgs` command.
+
+### Local Usage Without Installation
+
+Build the workspace first, then invoke the generated CLI directly:
+
+```bash
+npm run build
+node packages/crgs-cli/dist/index.js validate profiles/example
+```
+
+You can also invoke the package bin through npm:
+
+```bash
+npm exec --workspace @codryn/crgs-cli crgs -- validate profiles/example
+```
+
+### Install As a Local Command
+
+To make `crgs` available in your shell on the current machine, link the CLI package globally from the repository:
+
+```bash
+npm run build
+npm link --workspace @codryn/crgs-cli
+```
+
+After linking, the command is available as:
+
+```bash
+crgs validate profiles/example
+```
+
+To remove the global link later:
+
+```bash
+npm unlink -g @codryn/crgs-cli
+```
+
+### Commands
+
+The current CLI surface is:
+
+- `crgs validate <path>`
+- `crgs build <path> --output <file>`
+- `crgs graph <bundle> --output <file>`
+- `crgs evaluate --bundle <bundle> --subject <subject> --target <entity-id>`
+
+`validate` accepts either a CRGS document file or a directory containing `profile.json` and/or `bundle.json`.
+
+### End-to-End Example
+
+The example profile now provides an executable reference slice that can be run through the full pipeline:
+
+```bash
+crgs validate profiles/example
+crgs build profiles/example --output dist/example.bundle.json
+crgs graph dist/example.bundle.json --output dist/example.graph.json
+crgs evaluate --bundle dist/example.bundle.json --subject examples/characters/example-hero.json --target example.ability.battle-mage
+```
+
+This example answers several reference questions directly from the generated bundle and graph:
+
+- prerequisites for an ability
+- entities unlocked by an ability
+- whether a sample character configuration satisfies a target ability
+- a graph path from current state to a target ability
+- invalid references through conformance cases
+- cycle detection in prerequisite graphs
+
 ## Schema URIs
 
 Core CRGS schemas use the specification-versioned base `https://schemas.codryn.com/crgs/v0.1/...`.
