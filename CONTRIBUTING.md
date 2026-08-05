@@ -31,10 +31,9 @@ CRGS is a specification project. Contributions should improve clarity, interoper
 ```bash
 npm install
 npm run validate
-npm run lint
-npm test
-npm run build
 ```
+
+`npm run validate` runs the full local check sequence used for repository verification: schema validation, linting, tests, and workspace builds.
 
 ## Pull Requests
 

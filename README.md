@@ -51,9 +51,9 @@ This repository uses Node.js tooling for validation and project checks.
 ```bash
 npm install
 npm run validate
-npm run lint
-npm test
 ```
+
+`npm run validate` runs the full local repository check: schema validation, linting, tests, and workspace builds.
 
 ## Status
 
