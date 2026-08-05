@@ -1,0 +1,13 @@
+{
+  "entityIds": [
+    "character.example-hero",
+    "example.ability.powerful-strike",
+    "example.ability.arcane-training"
+  ],
+  "facts": {
+    "attribute:strength": 3,
+    "attribute:intelligence": 3,
+    "skill:arcana": 2,
+    "character:level": 5
+  }
+}

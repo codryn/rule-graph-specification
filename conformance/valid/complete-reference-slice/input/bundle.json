@@ -1,14 +1,13 @@
 {
   "specVersion": "0.1.0",
   "manifest": {
-    "id": "example-rpg.reference-slice",
-    "title": "Example RPG Executable Reference Slice",
-    "datasetVersion": "0.1.0",
-    "description": "A synthetic CRGS reference bundle that exercises entities, requirements, relations, validation, graph generation, and evaluation."
+    "id": "conformance.valid.complete-reference-slice",
+    "title": "Complete Reference Slice",
+    "datasetVersion": "0.1.0"
   },
   "profile": {
     "id": "example.profile.demo",
-    "name": "Example RPG",
+    "name": "Example Demo",
     "version": "0.1.0",
     "specVersion": "0.1.0",
     "extensions": {
@@ -30,26 +29,6 @@
           "schema": "https://schemas.codryn.com/crgs/profiles/example/v0.1/entities/character.schema.json"
         }
       ],
-      "requirementTypes": [
-        {
-          "id": "example.requirement.attribute-rating",
-          "schema": "https://schemas.codryn.com/crgs/profiles/example/v0.1/requirements/attribute-rating.schema.json"
-        },
-        {
-          "id": "example.requirement.skill-rating",
-          "schema": "https://schemas.codryn.com/crgs/profiles/example/v0.1/requirements/skill-rating.schema.json"
-        }
-      ],
-      "effectTypes": [
-        {
-          "id": "example.effect.grant",
-          "schema": "https://schemas.codryn.com/crgs/profiles/example/v0.1/effects/grant.schema.json"
-        },
-        {
-          "id": "example.effect.increase",
-          "schema": "https://schemas.codryn.com/crgs/profiles/example/v0.1/effects/increase.schema.json"
-        }
-      ],
       "relationTypes": [
         {
           "id": "example.relation.unlocks",
@@ -67,13 +46,6 @@
       }
     },
     {
-      "id": "example.attribute.agility",
-      "type": "example.entity.attribute",
-      "label": {
-        "default": "Agility"
-      }
-    },
-    {
       "id": "example.attribute.intelligence",
       "type": "example.entity.attribute",
       "label": {
@@ -81,41 +53,10 @@
       }
     },
     {
-      "id": "example.skill.athletics",
-      "type": "example.entity.skill",
-      "label": {
-        "default": "Athletics"
-      }
-    },
-    {
       "id": "example.skill.arcana",
       "type": "example.entity.skill",
       "label": {
         "default": "Arcana"
-      }
-    },
-    {
-      "id": "example.ability.powerful-strike",
-      "type": "example.entity.ability",
-      "label": {
-        "default": "Powerful Strike"
-      },
-      "requirements": {
-        "kind": "fact",
-        "fact": "attribute:strength",
-        "operator": "atLeast",
-        "value": 3
-      }
-    },
-    {
-      "id": "example.ability.cleaving-strike",
-      "type": "example.entity.ability",
-      "label": {
-        "default": "Cleaving Strike"
-      },
-      "requirements": {
-        "kind": "crgs.requirement.entity",
-        "targetId": "example.ability.powerful-strike"
       }
     },
     {
@@ -141,6 +82,30 @@
             "value": 2
           }
         ]
+      }
+    },
+    {
+      "id": "example.ability.powerful-strike",
+      "type": "example.entity.ability",
+      "label": {
+        "default": "Powerful Strike"
+      },
+      "requirements": {
+        "kind": "fact",
+        "fact": "attribute:strength",
+        "operator": "atLeast",
+        "value": 3
+      }
+    },
+    {
+      "id": "example.ability.cleaving-strike",
+      "type": "example.entity.ability",
+      "label": {
+        "default": "Cleaving Strike"
+      },
+      "requirements": {
+        "kind": "crgs.requirement.entity",
+        "targetId": "example.ability.powerful-strike"
       }
     },
     {

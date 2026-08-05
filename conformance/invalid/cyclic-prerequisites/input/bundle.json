@@ -1,0 +1,47 @@
+{
+  "specVersion": "0.1.0",
+  "manifest": {
+    "id": "conformance.invalid.cyclic-prerequisites",
+    "title": "Cyclic Prerequisites",
+    "datasetVersion": "0.1.0"
+  },
+  "profile": {
+    "id": "example.profile.demo",
+    "name": "Example Demo",
+    "version": "0.1.0",
+    "specVersion": "0.1.0",
+    "extensions": {
+      "entityTypes": [
+        {
+          "id": "example.entity.ability",
+          "schema": "https://schemas.codryn.com/crgs/profiles/example/v0.1/entities/ability.schema.json"
+        }
+      ]
+    }
+  },
+  "entities": [
+    {
+      "id": "example.ability.arcane-training",
+      "type": "example.entity.ability",
+      "label": {
+        "default": "Arcane Training"
+      },
+      "requirements": {
+        "kind": "crgs.requirement.entity",
+        "targetId": "example.ability.powerful-strike"
+      }
+    },
+    {
+      "id": "example.ability.powerful-strike",
+      "type": "example.entity.ability",
+      "label": {
+        "default": "Powerful Strike"
+      },
+      "requirements": {
+        "kind": "crgs.requirement.entity",
+        "targetId": "example.ability.arcane-training"
+      }
+    }
+  ],
+  "relationships": []
+}

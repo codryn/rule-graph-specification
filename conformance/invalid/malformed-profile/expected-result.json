@@ -1,0 +1,10 @@
+{
+  "valid": false,
+  "errors": [
+    {
+      "code": "CRGS_SCHEMA_VALIDATION_ERROR",
+      "path": "/profile/extensions/entityTypes/0/id",
+      "keyword": "pattern"
+    }
+  ]
+}

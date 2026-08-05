@@ -12,6 +12,19 @@
     },
     {
       "$ref": "https://schemas.codryn.com/crgs/v0.1/requirements/requirement-group.schema.json"
+    },
+    {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "not": {
+            "enum": ["fact", "group"]
+          }
+        }
+      },
+      "required": ["kind"],
+      "additionalProperties": true
     }
   ],
   "examples": [

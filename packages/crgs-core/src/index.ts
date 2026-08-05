@@ -423,9 +423,7 @@ function evaluateEntityRequirement(
   const targetId = typeof expression.targetId === "string" ? expression.targetId : undefined;
   const activeEntityIds = new Set(context.entityIds ?? []);
   const isActive = targetId !== undefined && activeEntityIds.has(targetId);
-  const existsInIndex =
-    targetId !== undefined ? context.entityIndex?.byId.has(targetId) ?? false : false;
-  const satisfied = Boolean(targetId) && (isActive || existsInIndex);
+  const satisfied = Boolean(targetId) && isActive;
 
   return {
     satisfied,
@@ -499,6 +497,10 @@ function validateRequirementExpression(
       }
     }
 
+    return;
+  }
+
+  if (kind === entityRequirementKind) {
     return;
   }
 

@@ -3,16 +3,24 @@
   "name": "Example RPG",
   "version": "0.1.0",
   "specVersion": "0.1.0",
-  "description": "A minimal demonstration profile used to verify CRGS repository architecture.",
+  "description": "An executable reference profile used to verify the CRGS end-to-end pipeline.",
   "extensions": {
     "entityTypes": [
       {
-        "id": "example.entity.trait",
-        "schema": "https://schemas.codryn.com/crgs/profiles/example/v0.1/entities/trait.schema.json"
+        "id": "example.entity.attribute",
+        "schema": "https://schemas.codryn.com/crgs/profiles/example/v0.1/entities/attribute.schema.json"
       },
       {
-        "id": "example.entity.selection",
-        "schema": "https://schemas.codryn.com/crgs/profiles/example/v0.1/entities/selection.schema.json"
+        "id": "example.entity.skill",
+        "schema": "https://schemas.codryn.com/crgs/profiles/example/v0.1/entities/skill.schema.json"
+      },
+      {
+        "id": "example.entity.ability",
+        "schema": "https://schemas.codryn.com/crgs/profiles/example/v0.1/entities/ability.schema.json"
+      },
+      {
+        "id": "example.entity.character",
+        "schema": "https://schemas.codryn.com/crgs/profiles/example/v0.1/entities/character.schema.json"
       }
     ],
     "requirementTypes": [
@@ -37,12 +45,8 @@
     ],
     "relationTypes": [
       {
-        "id": "example.relation.grants",
-        "schema": "https://schemas.codryn.com/crgs/profiles/example/v0.1/relations/grants.schema.json"
-      },
-      {
-        "id": "example.relation.depends-on",
-        "schema": "https://schemas.codryn.com/crgs/profiles/example/v0.1/relations/depends-on.schema.json"
+        "id": "example.relation.unlocks",
+        "schema": "https://schemas.codryn.com/crgs/profiles/example/v0.1/relations/unlocks.schema.json"
       }
     ]
   }

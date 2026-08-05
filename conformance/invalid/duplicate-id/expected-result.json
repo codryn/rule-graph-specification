@@ -1,0 +1,10 @@
+{
+  "valid": false,
+  "errors": [
+    {
+      "code": "CRGS_DUPLICATE_ENTITY_ID",
+      "path": "/entities/1/id",
+      "reference": "example.ability.arcane-training"
+    }
+  ]
+}

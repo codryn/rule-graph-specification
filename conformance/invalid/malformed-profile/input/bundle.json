@@ -1,0 +1,32 @@
+{
+  "specVersion": "0.1.0",
+  "manifest": {
+    "id": "conformance.invalid.malformed-profile",
+    "title": "Malformed Profile",
+    "datasetVersion": "0.1.0"
+  },
+  "profile": {
+    "id": "example.profile.demo",
+    "name": "Example Demo",
+    "version": "0.1.0",
+    "specVersion": "0.1.0",
+    "extensions": {
+      "entityTypes": [
+        {
+          "id": "ability",
+          "schema": "https://schemas.codryn.com/crgs/profiles/example/v0.1/entities/ability.schema.json"
+        }
+      ]
+    }
+  },
+  "entities": [
+    {
+      "id": "example.ability.arcane-training",
+      "type": "example.entity.ability",
+      "label": {
+        "default": "Arcane Training"
+      }
+    }
+  ],
+  "relationships": []
+}

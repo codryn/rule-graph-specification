@@ -1,0 +1,13 @@
+{
+  "valid": false,
+  "errors": [
+    {
+      "code": "CRGS_CYCLIC_PREREQUISITES",
+      "path": "/",
+      "cycle": [
+        "example.ability.arcane-training",
+        "example.ability.powerful-strike"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,163 @@
+{
+  "valid": true,
+  "errors": [],
+  "graph": {
+    "nodes": [
+      {
+        "id": "character.example-hero",
+        "kind": "entity",
+        "entityType": "example.entity.character"
+      },
+      {
+        "id": "example.ability.arcane-training",
+        "kind": "entity",
+        "entityType": "example.entity.ability"
+      },
+      {
+        "id": "example.ability.battle-mage",
+        "kind": "entity",
+        "entityType": "example.entity.ability"
+      },
+      {
+        "id": "example.ability.cleaving-strike",
+        "kind": "entity",
+        "entityType": "example.entity.ability"
+      },
+      {
+        "id": "example.ability.powerful-strike",
+        "kind": "entity",
+        "entityType": "example.entity.ability"
+      },
+      {
+        "id": "example.attribute.intelligence",
+        "kind": "entity",
+        "entityType": "example.entity.attribute"
+      },
+      {
+        "id": "example.attribute.strength",
+        "kind": "entity",
+        "entityType": "example.entity.attribute"
+      },
+      {
+        "id": "example.skill.arcana",
+        "kind": "entity",
+        "entityType": "example.entity.skill"
+      },
+      {
+        "id": "virtual.attribute.intelligence.gte.3",
+        "kind": "virtual-threshold",
+        "fact": "attribute:intelligence",
+        "operator": "atLeast",
+        "value": 3
+      },
+      {
+        "id": "virtual.attribute.strength.gte.3",
+        "kind": "virtual-threshold",
+        "fact": "attribute:strength",
+        "operator": "atLeast",
+        "value": 3
+      },
+      {
+        "id": "virtual.character.level.gte.5",
+        "kind": "virtual-threshold",
+        "fact": "character:level",
+        "operator": "atLeast",
+        "value": 5
+      },
+      {
+        "id": "virtual.skill.arcana.gte.2",
+        "kind": "virtual-threshold",
+        "fact": "skill:arcana",
+        "operator": "atLeast",
+        "value": 2
+      }
+    ],
+    "edges": [
+      {
+        "id": "required-by:example.ability.arcane-training:virtual.attribute.intelligence.gte.3",
+        "source": "example.ability.arcane-training",
+        "target": "virtual.attribute.intelligence.gte.3",
+        "type": "required-by"
+      },
+      {
+        "id": "required-by:example.ability.arcane-training:virtual.skill.arcana.gte.2",
+        "source": "example.ability.arcane-training",
+        "target": "virtual.skill.arcana.gte.2",
+        "type": "required-by"
+      },
+      {
+        "id": "required-by:example.ability.battle-mage:example.ability.arcane-training",
+        "source": "example.ability.battle-mage",
+        "target": "example.ability.arcane-training",
+        "type": "required-by"
+      },
+      {
+        "id": "required-by:example.ability.battle-mage:example.ability.powerful-strike",
+        "source": "example.ability.battle-mage",
+        "target": "example.ability.powerful-strike",
+        "type": "required-by"
+      },
+      {
+        "id": "required-by:example.ability.battle-mage:virtual.character.level.gte.5",
+        "source": "example.ability.battle-mage",
+        "target": "virtual.character.level.gte.5",
+        "type": "required-by"
+      },
+      {
+        "id": "required-by:example.ability.cleaving-strike:example.ability.powerful-strike",
+        "source": "example.ability.cleaving-strike",
+        "target": "example.ability.powerful-strike",
+        "type": "required-by"
+      },
+      {
+        "id": "required-by:example.ability.powerful-strike:virtual.attribute.strength.gte.3",
+        "source": "example.ability.powerful-strike",
+        "target": "virtual.attribute.strength.gte.3",
+        "type": "required-by"
+      },
+      {
+        "id": "requires:example.ability.arcane-training:example.ability.battle-mage",
+        "source": "example.ability.arcane-training",
+        "target": "example.ability.battle-mage",
+        "type": "requires"
+      },
+      {
+        "id": "requires:example.ability.powerful-strike:example.ability.battle-mage",
+        "source": "example.ability.powerful-strike",
+        "target": "example.ability.battle-mage",
+        "type": "requires"
+      },
+      {
+        "id": "requires:example.ability.powerful-strike:example.ability.cleaving-strike",
+        "source": "example.ability.powerful-strike",
+        "target": "example.ability.cleaving-strike",
+        "type": "requires"
+      },
+      {
+        "id": "requires:virtual.attribute.intelligence.gte.3:example.ability.arcane-training",
+        "source": "virtual.attribute.intelligence.gte.3",
+        "target": "example.ability.arcane-training",
+        "type": "requires"
+      },
+      {
+        "id": "requires:virtual.attribute.strength.gte.3:example.ability.powerful-strike",
+        "source": "virtual.attribute.strength.gte.3",
+        "target": "example.ability.powerful-strike",
+        "type": "requires"
+      },
+      {
+        "id": "requires:virtual.character.level.gte.5:example.ability.battle-mage",
+        "source": "virtual.character.level.gte.5",
+        "target": "example.ability.battle-mage",
+        "type": "requires"
+      },
+      {
+        "id": "requires:virtual.skill.arcana.gte.2:example.ability.arcane-training",
+        "source": "virtual.skill.arcana.gte.2",
+        "target": "example.ability.arcane-training",
+        "type": "requires"
+      }
+    ],
+    "cycles": []
+  }
+}

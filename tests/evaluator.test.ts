@@ -147,6 +147,37 @@ describe("evaluate", () => {
     });
   });
 
+  it("requires the subject to own an entity requirement target", () => {
+    const resolved = resolveBundle(createBundle());
+
+    const result = evaluate(
+      {
+        kind: "crgs.requirement.entity",
+        targetId: "background.scholar"
+      },
+      {
+        entityIndex: resolved.index,
+        entityIds: ["ancestry.human"]
+      }
+    );
+
+    expect(result).toEqual({
+      satisfied: false,
+      evaluated: [
+        {
+          requirement: "crgs.requirement.entity",
+          targetId: "background.scholar",
+          satisfied: false
+        }
+      ],
+      missing: [
+        {
+          entityId: "background.scholar"
+        }
+      ]
+    });
+  });
+
   it("delegates profile-defined requirement kinds to custom evaluators", () => {
     const expression: CustomRequirementExpression = {
       kind: "example.requirement.attribute-rating",

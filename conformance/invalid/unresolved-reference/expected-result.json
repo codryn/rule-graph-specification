@@ -1,0 +1,10 @@
+{
+  "valid": false,
+  "errors": [
+    {
+      "code": "CRGS_REFERENCE_NOT_FOUND",
+      "path": "/relationships/0/to",
+      "reference": "example.ability.missing"
+    }
+  ]
+}
