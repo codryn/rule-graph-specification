@@ -53,16 +53,36 @@
         "version": "0.1.0",
         "specVersion": "0.1.0",
         "extensions": {
-          "entityTypes": ["trait", "selection"],
-          "requirementTypes": ["fact", "group"],
-          "effectTypes": ["grant", "increase"],
-          "relationshipTypes": ["grants", "depends-on"]
+          "entityTypes": [
+            {
+              "id": "example.entity.trait",
+              "schema": "https://example.crgs.dev/schema/entities/trait.schema.json"
+            }
+          ],
+          "requirementTypes": [
+            {
+              "id": "example.requirement.attribute-rating",
+              "schema": "https://example.crgs.dev/schema/requirements/attribute-rating.schema.json"
+            }
+          ],
+          "effectTypes": [
+            {
+              "id": "example.effect.grant",
+              "schema": "https://example.crgs.dev/schema/effects/grant.schema.json"
+            }
+          ],
+          "relationTypes": [
+            {
+              "id": "example.relation.grants",
+              "schema": "https://example.crgs.dev/schema/relations/grants.schema.json"
+            }
+          ]
         }
       },
       "entities": [
         {
           "id": "ancestry.human",
-          "type": "trait",
+          "type": "example.entity.trait",
           "label": {
             "default": "Human"
           }
@@ -71,7 +91,7 @@
       "relationships": [
         {
           "id": "rel.human-grants-adaptable",
-          "type": "grants",
+          "type": "example.relation.grants",
           "from": "ancestry.human",
           "to": "feature.adaptable"
         }

@@ -12,7 +12,7 @@ An Effect describes a typed operation applied to a target. Version 0.1 supports 
 
 ```json
 {
-  "type": "increase",
+  "type": "example.effect.increase",
   "target": "resource.points",
   "operation": "increase",
   "value": 1

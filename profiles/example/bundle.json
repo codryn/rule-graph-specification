@@ -7,28 +7,64 @@
     "description": "A profile-scoped demonstration bundle used to verify CRGS architecture."
   },
   "profile": {
-    "id": "example-rpg",
+    "id": "example.profile.demo",
     "name": "Example RPG",
     "version": "0.1.0",
     "specVersion": "0.1.0",
     "extensions": {
-      "entityTypes": ["trait", "selection"],
-      "requirementTypes": ["fact", "group"],
-      "effectTypes": ["grant", "increase"],
-      "relationshipTypes": ["grants", "depends-on"]
+      "entityTypes": [
+        {
+          "id": "example.entity.trait",
+          "schema": "https://example.crgs.dev/schema/entities/trait.schema.json"
+        },
+        {
+          "id": "example.entity.selection",
+          "schema": "https://example.crgs.dev/schema/entities/selection.schema.json"
+        }
+      ],
+      "requirementTypes": [
+        {
+          "id": "example.requirement.attribute-rating",
+          "schema": "https://example.crgs.dev/schema/requirements/attribute-rating.schema.json"
+        },
+        {
+          "id": "example.requirement.skill-rating",
+          "schema": "https://example.crgs.dev/schema/requirements/skill-rating.schema.json"
+        }
+      ],
+      "effectTypes": [
+        {
+          "id": "example.effect.grant",
+          "schema": "https://example.crgs.dev/schema/effects/grant.schema.json"
+        },
+        {
+          "id": "example.effect.increase",
+          "schema": "https://example.crgs.dev/schema/effects/increase.schema.json"
+        }
+      ],
+      "relationTypes": [
+        {
+          "id": "example.relation.grants",
+          "schema": "https://example.crgs.dev/schema/relations/grants.schema.json"
+        },
+        {
+          "id": "example.relation.depends-on",
+          "schema": "https://example.crgs.dev/schema/relations/depends-on.schema.json"
+        }
+      ]
     }
   },
   "entities": [
     {
       "id": "selection.origin",
-      "type": "selection",
+      "type": "example.entity.selection",
       "label": {
         "default": "Origin Selection"
       }
     },
     {
       "id": "trait.brave",
-      "type": "trait",
+      "type": "example.entity.trait",
       "label": {
         "default": "Brave"
       },
@@ -39,7 +75,7 @@
       },
       "effects": [
         {
-          "type": "grant",
+          "type": "example.effect.grant",
           "target": "capability.advantage.fear",
           "operation": "grant",
           "value": true
@@ -50,7 +86,7 @@
   "relationships": [
     {
       "id": "rel.origin-grants-brave",
-      "type": "grants",
+      "type": "example.relation.grants",
       "from": "selection.origin",
       "to": "trait.brave"
     }

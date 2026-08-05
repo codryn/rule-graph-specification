@@ -37,7 +37,7 @@
   "examples": [
     {
       "id": "feature.adaptable",
-      "type": "trait",
+      "type": "example.entity.trait",
       "label": {
         "default": "Adaptable"
       },

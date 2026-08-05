@@ -1,4 +1,8 @@
 export const schemaIds = {
+  extensionRegistration:
+    "https://crgs.dev/schema/profile/extension-registration.schema.json",
+  profileDependency:
+    "https://crgs.dev/schema/profile/profile-dependency.schema.json",
   localizedText: "https://crgs.dev/schema/common/localized-text.schema.json",
   sourceReference:
     "https://crgs.dev/schema/common/source-reference.schema.json",

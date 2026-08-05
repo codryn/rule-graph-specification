@@ -81,7 +81,7 @@ const schemaChecks = [
     schemaId: "https://crgs.dev/schema/entities/entity.schema.json",
     validExample: {
       id: "feature.adaptable",
-      type: "trait",
+      type: "example.entity.trait",
       label: { default: "Adaptable" }
     },
     invalidExample: {
@@ -130,7 +130,7 @@ const schemaChecks = [
     schemaId: "https://crgs.dev/schema/relations/relation.schema.json",
     validExample: {
       id: "rel.human-grants-adaptable",
-      type: "grants",
+      type: "example.relation.grants",
       from: "ancestry.human",
       to: "feature.adaptable"
     },
@@ -197,24 +197,58 @@ const schemaChecks = [
     }
   },
   {
+    name: "ExtensionRegistration",
+    schemaId: "https://crgs.dev/schema/profile/extension-registration.schema.json",
+    validExample: {
+      id: "example.entity.ability",
+      schema: "https://example.crgs.dev/schema/entities/ability.schema.json"
+    },
+    invalidExample: {
+      id: "ability",
+      schema: "not-a-uri"
+    }
+  },
+  {
+    name: "ProfileDependency",
+    schemaId: "https://crgs.dev/schema/profile/profile-dependency.schema.json",
+    validExample: {
+      profileId: "codryn.base.common",
+      versionRange: "^1.0.0"
+    },
+    invalidExample: {
+      profileId: "",
+      versionRange: ""
+    }
+  },
+  {
     name: "ProfileManifest",
     schemaId: "https://crgs.dev/schema/profile/profile-manifest.schema.json",
     validExample: {
-      id: "example-rpg",
+      id: "example.profile.demo",
       name: "Example RPG",
       version: "0.1.0",
       specVersion: "0.1.0",
       extensions: {
-        entityTypes: ["trait"]
+        entityTypes: [
+          {
+            id: "example.entity.trait",
+            schema: "https://example.crgs.dev/schema/entities/trait.schema.json"
+          }
+        ]
       }
     },
     invalidExample: {
-      id: "example-rpg",
+      id: "example.profile.demo",
       name: "Example RPG",
       version: "0.1.0",
       specVersion: "0.1.0",
       extensions: {
-        entityTypes: ["trait"],
+        entityTypes: [
+          {
+            id: "trait",
+            schema: "https://example.crgs.dev/schema/entities/trait.schema.json"
+          }
+        ],
         extra: ["nope"]
       }
     }
@@ -243,23 +277,36 @@ const schemaChecks = [
         datasetVersion: "0.1.0"
       },
       profile: {
-        id: "example-rpg",
+        id: "example.profile.demo",
         name: "Example RPG",
         version: "0.1.0",
         specVersion: "0.1.0",
-        extensions: {}
+        extensions: {
+          entityTypes: [
+            {
+              id: "example.entity.trait",
+              schema: "https://example.crgs.dev/schema/entities/trait.schema.json"
+            }
+          ],
+          relationTypes: [
+            {
+              id: "example.relation.grants",
+              schema: "https://example.crgs.dev/schema/relations/grants.schema.json"
+            }
+          ]
+        }
       },
       entities: [
         {
           id: "ancestry.human",
-          type: "trait",
+          type: "example.entity.trait",
           label: { default: "Human" }
         }
       ],
       relationships: [
         {
           id: "rel.human-grants-adaptable",
-          type: "grants",
+          type: "example.relation.grants",
           from: "ancestry.human",
           to: "feature.adaptable"
         }
@@ -268,7 +315,7 @@ const schemaChecks = [
     invalidExample: {
       specVersion: "0.1.0",
       profile: {
-        id: "example-rpg",
+        id: "example.profile.demo",
         name: "Example RPG",
         version: "0.1.0",
         specVersion: "0.1.0",
@@ -282,17 +329,31 @@ const schemaChecks = [
     name: "Profile",
     schemaId: "https://crgs.dev/schema/profile/profile.schema.json",
     validExample: {
-      id: "example-rpg",
+      id: "example.profile.demo",
       name: "Example RPG",
       version: "0.1.0",
       specVersion: "0.1.0",
-      extensions: {}
+      extensions: {
+        entityTypes: [
+          {
+            id: "example.entity.trait",
+            schema: "https://example.crgs.dev/schema/entities/trait.schema.json"
+          }
+        ]
+      }
     },
     invalidExample: {
-      id: "example-rpg",
+      id: "example.profile.demo",
       name: "Example RPG",
       version: "0.1.0",
-      extensions: {}
+      extensions: {
+        relationTypes: [
+          {
+            id: "grants",
+            schema: "https://example.crgs.dev/schema/relations/grants.schema.json"
+          }
+        ]
+      }
     }
   },
   {
@@ -313,7 +374,7 @@ const schemaChecks = [
     schemaId: "https://crgs.dev/schema/relations/relationship.schema.json",
     validExample: {
       id: "rel.human-grants-adaptable",
-      type: "grants",
+      type: "example.relation.grants",
       from: "ancestry.human",
       to: "feature.adaptable"
     },

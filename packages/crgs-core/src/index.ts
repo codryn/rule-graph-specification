@@ -65,17 +65,29 @@ export interface Relationship {
   metadata?: Metadata;
 }
 
+export interface ExtensionRegistration {
+  id: string;
+  schema: string;
+  description?: string;
+}
+
+export interface ProfileDependency {
+  profileId: string;
+  versionRange: string;
+}
+
 export interface Profile {
   id: string;
   name: string;
   version: string;
   specVersion: string;
   description?: string;
+  dependencies?: ProfileDependency[];
   extensions: {
-    entityTypes?: string[];
-    requirementTypes?: string[];
-    effectTypes?: string[];
-    relationshipTypes?: string[];
+    entityTypes?: ExtensionRegistration[];
+    requirementTypes?: ExtensionRegistration[];
+    effectTypes?: ExtensionRegistration[];
+    relationTypes?: ExtensionRegistration[];
   };
 }
 

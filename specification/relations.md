@@ -13,7 +13,7 @@ A Relationship is a typed directed edge from one entity identifier to another.
 ```json
 {
   "id": "rel.human-grants-adaptable",
-  "type": "grants",
+  "type": "example.relation.grants",
   "from": "ancestry.human",
   "to": "feature.adaptable"
 }

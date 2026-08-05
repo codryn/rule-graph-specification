@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://crgs.dev/schema/profile/profile.schema.json",
   "title": "Profile",
-  "description": "Profile declaration that identifies the extension vocabularies layered on top of a specific CRGS version.",
+  "description": "Profile declaration that registers extension identifiers, their validator schema URIs, and any dependent profiles layered on top of a specific CRGS version.",
   "type": "object",
   "properties": {
     "id": {
@@ -25,38 +25,93 @@
       "type": "string",
       "minLength": 1
     },
+    "dependencies": {
+      "type": "array",
+      "items": {
+        "$ref": "https://crgs.dev/schema/profile/profile-dependency.schema.json"
+      },
+      "uniqueItems": true
+    },
     "extensions": {
       "type": "object",
       "properties": {
         "entityTypes": {
           "type": "array",
           "items": {
-            "type": "string",
-            "minLength": 1
+            "allOf": [
+              {
+                "$ref": "https://crgs.dev/schema/profile/extension-registration.schema.json"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "pattern": "^[a-z0-9]+(?:\\.[a-z0-9][a-z0-9-]*)*\\.entity\\.[a-z0-9][a-z0-9-]*$"
+                  }
+                }
+              }
+            ]
           },
           "uniqueItems": true
         },
         "requirementTypes": {
           "type": "array",
           "items": {
-            "type": "string",
-            "minLength": 1
+            "allOf": [
+              {
+                "$ref": "https://crgs.dev/schema/profile/extension-registration.schema.json"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "pattern": "^[a-z0-9]+(?:\\.[a-z0-9][a-z0-9-]*)*\\.requirement\\.[a-z0-9][a-z0-9-]*$"
+                  }
+                }
+              }
+            ]
           },
           "uniqueItems": true
         },
         "effectTypes": {
           "type": "array",
           "items": {
-            "type": "string",
-            "minLength": 1
+            "allOf": [
+              {
+                "$ref": "https://crgs.dev/schema/profile/extension-registration.schema.json"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "pattern": "^[a-z0-9]+(?:\\.[a-z0-9][a-z0-9-]*)*\\.effect\\.[a-z0-9][a-z0-9-]*$"
+                  }
+                }
+              }
+            ]
           },
           "uniqueItems": true
         },
-        "relationshipTypes": {
+        "relationTypes": {
           "type": "array",
           "items": {
-            "type": "string",
-            "minLength": 1
+            "allOf": [
+              {
+                "$ref": "https://crgs.dev/schema/profile/extension-registration.schema.json"
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "pattern": "^[a-z0-9]+(?:\\.[a-z0-9][a-z0-9-]*)*\\.relation\\.[a-z0-9][a-z0-9-]*$"
+                  }
+                }
+              }
+            ]
           },
           "uniqueItems": true
         }
@@ -75,10 +130,46 @@
       "specVersion": "0.1.0",
       "description": "A minimal demonstration profile used to verify CRGS repository architecture.",
       "extensions": {
-        "entityTypes": ["trait", "selection"],
-        "requirementTypes": ["fact", "group"],
-        "effectTypes": ["grant", "increase"],
-        "relationshipTypes": ["grants", "depends-on"]
+        "entityTypes": [
+          {
+            "id": "example.entity.trait",
+            "schema": "https://example.crgs.dev/schema/entities/trait.schema.json"
+          },
+          {
+            "id": "example.entity.selection",
+            "schema": "https://example.crgs.dev/schema/entities/selection.schema.json"
+          }
+        ],
+        "requirementTypes": [
+          {
+            "id": "example.requirement.attribute-rating",
+            "schema": "https://example.crgs.dev/schema/requirements/attribute-rating.schema.json"
+          },
+          {
+            "id": "example.requirement.skill-rating",
+            "schema": "https://example.crgs.dev/schema/requirements/skill-rating.schema.json"
+          }
+        ],
+        "effectTypes": [
+          {
+            "id": "example.effect.grant",
+            "schema": "https://example.crgs.dev/schema/effects/grant.schema.json"
+          },
+          {
+            "id": "example.effect.increase",
+            "schema": "https://example.crgs.dev/schema/effects/increase.schema.json"
+          }
+        ],
+        "relationTypes": [
+          {
+            "id": "example.relation.grants",
+            "schema": "https://example.crgs.dev/schema/relations/grants.schema.json"
+          },
+          {
+            "id": "example.relation.depends-on",
+            "schema": "https://example.crgs.dev/schema/relations/depends-on.schema.json"
+          }
+        ]
       }
     }
   ]

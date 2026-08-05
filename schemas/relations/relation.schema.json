@@ -30,7 +30,7 @@
   "examples": [
     {
       "id": "rel.human-grants-adaptable",
-      "type": "grants",
+      "type": "example.relation.grants",
       "from": "ancestry.human",
       "to": "feature.adaptable"
     }

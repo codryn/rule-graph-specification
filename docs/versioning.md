@@ -31,6 +31,8 @@ All three domains use Semantic Versioning.
 3. A profile may tighten validation for its own extension vocabulary, but it must not redefine core semantics.
 4. Minor CRGS releases should preserve compatibility for existing valid core documents unless a major version bump is made.
 5. Dataset migration rules are profile-specific and may require explicit conversion tooling.
+6. Changing or removing a registered extension identifier or its schema contract is a profile compatibility event and must be versioned in the affected profile.
+7. Adding or removing a profile dependency changes the active extension registry and must be treated as a profile compatibility decision.
 
 ## Release Discipline
 
