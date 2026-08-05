@@ -625,8 +625,12 @@ function printHelp(): void {
   }
   writeLine("");
   writeLine("Validation Modes:");
-  writeLine("  crgs validate <path>   Validate a bundle, profile, or profile directory.");
-  writeLine("  crgs validate --repo   Run the full repository validation pipeline.");
+  writeLine(
+    "  crgs validate <path>   Validate a bundle, profile, or profile directory."
+  );
+  writeLine(
+    "  crgs validate --repo   Run the full repository validation pipeline."
+  );
   writeLine("");
   writeLine("Options:");
   writeLine("  -h, --help     Show CLI usage.");
