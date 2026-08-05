@@ -23,29 +23,29 @@ Bundles declare exactly one root profile. Multiple profiles are combined only by
 {
   "id": "example.profile.demo",
   "name": "Example RPG",
-  "version": "0.1.0",
-  "specVersion": "0.1.0",
+  "version": "0.2.0",
+  "specVersion": "0.2.0",
   "extensions": {
     "entityTypes": [
       {
         "id": "example.entity.ability",
-        "schema": "https://schemas.codryn.com/crgs/profiles/example/v0.1/entities/ability.schema.json"
+        "schema": "https://schemas.codryn.com/crgs/profiles/example/v0.2/entities/ability.schema.json"
       }
     ],
     "requirementTypes": [
       {
         "id": "example.requirement.attribute-rating",
-        "schema": "https://schemas.codryn.com/crgs/profiles/example/v0.1/requirements/attribute-rating.schema.json"
+        "schema": "https://schemas.codryn.com/crgs/profiles/example/v0.2/requirements/attribute-rating.schema.json"
       },
       {
         "id": "example.requirement.skill-rating",
-        "schema": "https://schemas.codryn.com/crgs/profiles/example/v0.1/requirements/skill-rating.schema.json"
+        "schema": "https://schemas.codryn.com/crgs/profiles/example/v0.2/requirements/skill-rating.schema.json"
       }
     ],
     "relationTypes": [
       {
         "id": "example.relation.unlocks",
-        "schema": "https://schemas.codryn.com/crgs/profiles/example/v0.1/relations/unlocks.schema.json"
+        "schema": "https://schemas.codryn.com/crgs/profiles/example/v0.2/relations/unlocks.schema.json"
       }
     ]
   }

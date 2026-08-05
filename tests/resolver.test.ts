@@ -7,44 +7,44 @@ import { describe, expect, it } from "vitest";
 
 function createBundle(): Bundle {
   return {
-    specVersion: "0.1.0",
+    specVersion: "0.2.0",
     manifest: {
       id: "example-rpg.minimal",
       title: "Example RPG Minimal Bundle",
-      datasetVersion: "0.1.0"
+      datasetVersion: "0.2.0"
     },
     profile: {
       id: "example.profile.demo",
       name: "Example RPG",
-      version: "0.1.0",
-      specVersion: "0.1.0",
+      version: "0.2.0",
+      specVersion: "0.2.0",
       extensions: {
         entityTypes: [
           {
             id: "example.entity.trait",
             schema:
-              "https://schemas.codryn.com/crgs/profiles/example/v0.1/entities/trait.schema.json"
+              "https://schemas.codryn.com/crgs/profiles/example/v0.2/entities/trait.schema.json"
           }
         ],
         requirementTypes: [
           {
             id: "example.requirement.attribute-rating",
             schema:
-              "https://schemas.codryn.com/crgs/profiles/example/v0.1/requirements/attribute-rating.schema.json"
+              "https://schemas.codryn.com/crgs/profiles/example/v0.2/requirements/attribute-rating.schema.json"
           }
         ],
         effectTypes: [
           {
             id: "example.effect.grant",
             schema:
-              "https://schemas.codryn.com/crgs/profiles/example/v0.1/effects/grant.schema.json"
+              "https://schemas.codryn.com/crgs/profiles/example/v0.2/effects/grant.schema.json"
           }
         ],
         relationTypes: [
           {
             id: "example.relation.grants",
             schema:
-              "https://schemas.codryn.com/crgs/profiles/example/v0.1/relations/grants.schema.json"
+              "https://schemas.codryn.com/crgs/profiles/example/v0.2/relations/grants.schema.json"
           }
         ]
       }

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.codryn.com/crgs/v0.1/profile/profile-dependency.schema.json",
+  "$id": "https://schemas.codryn.com/crgs/v0.2/profile/profile-dependency.schema.json",
   "title": "ProfileDependency",
   "description": "Reference to another profile whose extension registry is imported into the active validator context.",
   "type": "object",

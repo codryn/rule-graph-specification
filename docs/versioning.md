@@ -41,40 +41,40 @@ Recommended schema publication uses versioned paths that distinguish CRGS core s
 ### CRGS Core
 
 ```text
-https://schemas.codryn.com/crgs/v0.1/common/metadata.schema.json
-https://schemas.codryn.com/crgs/v0.1/entities/entity.schema.json
-https://schemas.codryn.com/crgs/v0.1/requirements/expression.schema.json
-https://schemas.codryn.com/crgs/v0.1/profile/manifest.schema.json
+https://schemas.codryn.com/crgs/v0.2/common/metadata.schema.json
+https://schemas.codryn.com/crgs/v0.2/entities/entity.schema.json
+https://schemas.codryn.com/crgs/v0.2/requirements/expression.schema.json
+https://schemas.codryn.com/crgs/v0.2/profile/manifest.schema.json
 ```
 
-Here `v0.1` is the CRGS specification version.
+Here `v0.2` is the CRGS specification version.
 
 ### Example Profile
 
 ```text
-https://schemas.codryn.com/crgs/profiles/example/v0.1/profile.schema.json
-https://schemas.codryn.com/crgs/profiles/example/v0.1/entities/trait.schema.json
-https://schemas.codryn.com/crgs/profiles/example/v0.1/requirements/attribute-score.schema.json
+https://schemas.codryn.com/crgs/profiles/example/v0.2/profile.schema.json
+https://schemas.codryn.com/crgs/profiles/example/v0.2/entities/trait.schema.json
+https://schemas.codryn.com/crgs/profiles/example/v0.2/requirements/attribute-score.schema.json
 ```
 
-Here `v0.1` is the Example Profile version.
+Here `v0.2` is the Example Profile version.
 
 ### Pathfinder Profile
 
 Future profiles should follow the same split, for example:
 
 ```text
-https://schemas.codryn.com/crgs/profiles/pf1e/v0.1/profile.schema.json
-https://schemas.codryn.com/crgs/profiles/pf1e/v0.1/entities/feat.schema.json
-https://schemas.codryn.com/crgs/profiles/pf1e/v0.1/requirements/base-attack-bonus.schema.json
+https://schemas.codryn.com/crgs/profiles/pf1e/v0.2/profile.schema.json
+https://schemas.codryn.com/crgs/profiles/pf1e/v0.2/entities/feat.schema.json
+https://schemas.codryn.com/crgs/profiles/pf1e/v0.2/requirements/base-attack-bonus.schema.json
 ```
 
 ### Shadowrun 5 Profile
 
 ```text
-https://schemas.codryn.com/crgs/profiles/sr5/v0.1/profile.schema.json
-https://schemas.codryn.com/crgs/profiles/sr5/v0.1/entities/quality.schema.json
-https://schemas.codryn.com/crgs/profiles/sr5/v0.1/mechanics/dice-pool.schema.json
+https://schemas.codryn.com/crgs/profiles/sr5/v0.2/profile.schema.json
+https://schemas.codryn.com/crgs/profiles/sr5/v0.2/entities/quality.schema.json
+https://schemas.codryn.com/crgs/profiles/sr5/v0.2/mechanics/dice-pool.schema.json
 ```
 
 ## Release Discipline

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.codryn.com/crgs/v0.1/relations/relation.schema.json",
+  "$id": "https://schemas.codryn.com/crgs/v0.2/relations/relation.schema.json",
   "title": "Relation",
   "description": "Typed directed edge that connects one entity identifier to another.",
   "type": "object",
@@ -22,7 +22,7 @@
       "pattern": "^[a-z0-9][a-z0-9._:-]*$"
     },
     "metadata": {
-      "$ref": "https://schemas.codryn.com/crgs/v0.1/common/metadata.schema.json"
+      "$ref": "https://schemas.codryn.com/crgs/v0.2/common/metadata.schema.json"
     }
   },
   "required": ["id", "type", "from", "to"],

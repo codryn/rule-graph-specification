@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://schemas.codryn.com/crgs/v0.1/bundle/bundle.schema.json",
+  "$id": "https://schemas.codryn.com/crgs/v0.2/bundle/bundle.schema.json",
   "title": "Bundle",
   "description": "Transport unit containing dataset identity, profile declaration, entities, relations, and optional metadata.",
   "type": "object",
@@ -10,25 +10,25 @@
       "pattern": "^\\d+\\.\\d+\\.\\d+$"
     },
     "manifest": {
-      "$ref": "https://schemas.codryn.com/crgs/v0.1/bundle/dataset-manifest.schema.json"
+      "$ref": "https://schemas.codryn.com/crgs/v0.2/bundle/dataset-manifest.schema.json"
     },
     "profile": {
-      "$ref": "https://schemas.codryn.com/crgs/v0.1/profile/profile-manifest.schema.json"
+      "$ref": "https://schemas.codryn.com/crgs/v0.2/profile/profile-manifest.schema.json"
     },
     "entities": {
       "type": "array",
       "items": {
-        "$ref": "https://schemas.codryn.com/crgs/v0.1/entities/entity.schema.json"
+        "$ref": "https://schemas.codryn.com/crgs/v0.2/entities/entity.schema.json"
       }
     },
     "relationships": {
       "type": "array",
       "items": {
-        "$ref": "https://schemas.codryn.com/crgs/v0.1/relations/relation.schema.json"
+        "$ref": "https://schemas.codryn.com/crgs/v0.2/relations/relation.schema.json"
       }
     },
     "metadata": {
-      "$ref": "https://schemas.codryn.com/crgs/v0.1/common/metadata.schema.json"
+      "$ref": "https://schemas.codryn.com/crgs/v0.2/common/metadata.schema.json"
     }
   },
   "required": [
@@ -41,40 +41,40 @@
   "additionalProperties": false,
   "examples": [
     {
-      "specVersion": "0.1.0",
+      "specVersion": "0.2.0",
       "manifest": {
         "id": "example-rpg.minimal",
         "title": "Example RPG Minimal Bundle",
-        "datasetVersion": "0.1.0"
+        "datasetVersion": "0.2.0"
       },
       "profile": {
         "id": "example-rpg",
         "name": "Example RPG",
-        "version": "0.1.0",
-        "specVersion": "0.1.0",
+        "version": "0.2.0",
+        "specVersion": "0.2.0",
         "extensions": {
           "entityTypes": [
             {
               "id": "example.entity.trait",
-              "schema": "https://schemas.codryn.com/crgs/profiles/example/v0.1/entities/trait.schema.json"
+              "schema": "https://schemas.codryn.com/crgs/profiles/example/v0.2/entities/trait.schema.json"
             }
           ],
           "requirementTypes": [
             {
               "id": "example.requirement.attribute-rating",
-              "schema": "https://schemas.codryn.com/crgs/profiles/example/v0.1/requirements/attribute-rating.schema.json"
+              "schema": "https://schemas.codryn.com/crgs/profiles/example/v0.2/requirements/attribute-rating.schema.json"
             }
           ],
           "effectTypes": [
             {
               "id": "example.effect.grant",
-              "schema": "https://schemas.codryn.com/crgs/profiles/example/v0.1/effects/grant.schema.json"
+              "schema": "https://schemas.codryn.com/crgs/profiles/example/v0.2/effects/grant.schema.json"
             }
           ],
           "relationTypes": [
             {
               "id": "example.relation.grants",
-              "schema": "https://schemas.codryn.com/crgs/profiles/example/v0.1/relations/grants.schema.json"
+              "schema": "https://schemas.codryn.com/crgs/profiles/example/v0.2/relations/grants.schema.json"
             }
           ]
         }

@@ -54,22 +54,22 @@ const validations = [
   {
     name: "Example profile",
     schemaId:
-      "https://schemas.codryn.com/crgs/v0.1/profile/profile.schema.json",
+      "https://schemas.codryn.com/crgs/v0.2/profile/profile.schema.json",
     dataPath: join(rootDir, "profiles", "example", "profile.json")
   },
   {
     name: "Minimal example bundle",
-    schemaId: "https://schemas.codryn.com/crgs/v0.1/bundle/bundle.schema.json",
+    schemaId: "https://schemas.codryn.com/crgs/v0.2/bundle/bundle.schema.json",
     dataPath: join(rootDir, "examples", "minimal", "bundle.json")
   },
   {
     name: "Advanced example bundle",
-    schemaId: "https://schemas.codryn.com/crgs/v0.1/bundle/bundle.schema.json",
+    schemaId: "https://schemas.codryn.com/crgs/v0.2/bundle/bundle.schema.json",
     dataPath: join(rootDir, "examples", "advanced", "bundle.json")
   },
   {
     name: "Example profile demonstration bundle",
-    schemaId: "https://schemas.codryn.com/crgs/v0.1/bundle/bundle.schema.json",
+    schemaId: "https://schemas.codryn.com/crgs/v0.2/bundle/bundle.schema.json",
     dataPath: join(rootDir, "profiles", "example", "bundle.json")
   }
 ];
@@ -80,7 +80,7 @@ const schemaChecks = [
   {
     name: "Entity",
     schemaId:
-      "https://schemas.codryn.com/crgs/v0.1/entities/entity.schema.json",
+      "https://schemas.codryn.com/crgs/v0.2/entities/entity.schema.json",
     validExample: {
       id: "feature.adaptable",
       type: "example.entity.trait",
@@ -94,7 +94,7 @@ const schemaChecks = [
   {
     name: "LocalizedText",
     schemaId:
-      "https://schemas.codryn.com/crgs/v0.1/common/localized-text.schema.json",
+      "https://schemas.codryn.com/crgs/v0.2/common/localized-text.schema.json",
     validExample: {
       default: "Human",
       translations: { fr: "Humain" }
@@ -107,7 +107,7 @@ const schemaChecks = [
   {
     name: "SourceReference",
     schemaId:
-      "https://schemas.codryn.com/crgs/v0.1/common/source-reference.schema.json",
+      "https://schemas.codryn.com/crgs/v0.2/common/source-reference.schema.json",
     validExample: {
       title: "Core Rulebook",
       citation: "Core Rulebook, p. 42"
@@ -121,7 +121,7 @@ const schemaChecks = [
   {
     name: "Metadata",
     schemaId:
-      "https://schemas.codryn.com/crgs/v0.1/common/metadata.schema.json",
+      "https://schemas.codryn.com/crgs/v0.2/common/metadata.schema.json",
     validExample: {
       tags: ["example", "minimal"],
       attributes: { reviewed: true }
@@ -133,7 +133,7 @@ const schemaChecks = [
   {
     name: "Relation",
     schemaId:
-      "https://schemas.codryn.com/crgs/v0.1/relations/relation.schema.json",
+      "https://schemas.codryn.com/crgs/v0.2/relations/relation.schema.json",
     validExample: {
       id: "rel.human-grants-adaptable",
       type: "example.relation.grants",
@@ -149,7 +149,7 @@ const schemaChecks = [
   {
     name: "RequirementExpression",
     schemaId:
-      "https://schemas.codryn.com/crgs/v0.1/requirements/requirement-expression.schema.json",
+      "https://schemas.codryn.com/crgs/v0.2/requirements/requirement-expression.schema.json",
     validExample: {
       kind: "group",
       mode: "all",
@@ -171,7 +171,7 @@ const schemaChecks = [
   {
     name: "RequirementGroup",
     schemaId:
-      "https://schemas.codryn.com/crgs/v0.1/requirements/requirement-group.schema.json",
+      "https://schemas.codryn.com/crgs/v0.2/requirements/requirement-group.schema.json",
     validExample: {
       kind: "group",
       mode: "any",
@@ -192,7 +192,7 @@ const schemaChecks = [
   {
     name: "AtomicRequirement",
     schemaId:
-      "https://schemas.codryn.com/crgs/v0.1/requirements/atomic-requirement.schema.json",
+      "https://schemas.codryn.com/crgs/v0.2/requirements/atomic-requirement.schema.json",
     validExample: {
       kind: "fact",
       fact: "selected:ancestry",
@@ -208,11 +208,11 @@ const schemaChecks = [
   {
     name: "ExtensionRegistration",
     schemaId:
-      "https://schemas.codryn.com/crgs/v0.1/profile/extension-registration.schema.json",
+      "https://schemas.codryn.com/crgs/v0.2/profile/extension-registration.schema.json",
     validExample: {
       id: "example.entity.ability",
       schema:
-        "https://schemas.codryn.com/crgs/profiles/example/v0.1/entities/ability.schema.json"
+        "https://schemas.codryn.com/crgs/profiles/example/v0.2/entities/ability.schema.json"
     },
     invalidExample: {
       id: "ability",
@@ -222,7 +222,7 @@ const schemaChecks = [
   {
     name: "ProfileDependency",
     schemaId:
-      "https://schemas.codryn.com/crgs/v0.1/profile/profile-dependency.schema.json",
+      "https://schemas.codryn.com/crgs/v0.2/profile/profile-dependency.schema.json",
     validExample: {
       profileId: "codryn.base.common",
       versionRange: "^1.0.0"
@@ -235,18 +235,18 @@ const schemaChecks = [
   {
     name: "ProfileManifest",
     schemaId:
-      "https://schemas.codryn.com/crgs/v0.1/profile/profile-manifest.schema.json",
+      "https://schemas.codryn.com/crgs/v0.2/profile/profile-manifest.schema.json",
     validExample: {
       id: "example.profile.demo",
       name: "Example RPG",
-      version: "0.1.0",
-      specVersion: "0.1.0",
+      version: "0.2.0",
+      specVersion: "0.2.0",
       extensions: {
         entityTypes: [
           {
             id: "example.entity.trait",
             schema:
-              "https://schemas.codryn.com/crgs/profiles/example/v0.1/entities/trait.schema.json"
+              "https://schemas.codryn.com/crgs/profiles/example/v0.2/entities/trait.schema.json"
           }
         ]
       }
@@ -254,14 +254,14 @@ const schemaChecks = [
     invalidExample: {
       id: "example.profile.demo",
       name: "Example RPG",
-      version: "0.1.0",
-      specVersion: "0.1.0",
+      version: "0.2.0",
+      specVersion: "0.2.0",
       extensions: {
         entityTypes: [
           {
             id: "trait",
             schema:
-              "https://schemas.codryn.com/crgs/profiles/example/v0.1/entities/trait.schema.json"
+              "https://schemas.codryn.com/crgs/profiles/example/v0.2/entities/trait.schema.json"
           }
         ],
         extra: ["nope"]
@@ -271,11 +271,11 @@ const schemaChecks = [
   {
     name: "DatasetManifest",
     schemaId:
-      "https://schemas.codryn.com/crgs/v0.1/bundle/dataset-manifest.schema.json",
+      "https://schemas.codryn.com/crgs/v0.2/bundle/dataset-manifest.schema.json",
     validExample: {
       id: "example-rpg.minimal",
       title: "Example RPG Minimal Bundle",
-      datasetVersion: "0.1.0"
+      datasetVersion: "0.2.0"
     },
     invalidExample: {
       id: "example-rpg.minimal",
@@ -284,32 +284,32 @@ const schemaChecks = [
   },
   {
     name: "Bundle",
-    schemaId: "https://schemas.codryn.com/crgs/v0.1/bundle/bundle.schema.json",
+    schemaId: "https://schemas.codryn.com/crgs/v0.2/bundle/bundle.schema.json",
     validExample: {
-      specVersion: "0.1.0",
+      specVersion: "0.2.0",
       manifest: {
         id: "example-rpg.minimal",
         title: "Example RPG Minimal Bundle",
-        datasetVersion: "0.1.0"
+        datasetVersion: "0.2.0"
       },
       profile: {
         id: "example.profile.demo",
         name: "Example RPG",
-        version: "0.1.0",
-        specVersion: "0.1.0",
+        version: "0.2.0",
+        specVersion: "0.2.0",
         extensions: {
           entityTypes: [
             {
               id: "example.entity.trait",
               schema:
-                "https://schemas.codryn.com/crgs/profiles/example/v0.1/entities/trait.schema.json"
+                "https://schemas.codryn.com/crgs/profiles/example/v0.2/entities/trait.schema.json"
             }
           ],
           relationTypes: [
             {
               id: "example.relation.grants",
               schema:
-                "https://schemas.codryn.com/crgs/profiles/example/v0.1/relations/grants.schema.json"
+                "https://schemas.codryn.com/crgs/profiles/example/v0.2/relations/grants.schema.json"
             }
           ]
         }
@@ -331,12 +331,12 @@ const schemaChecks = [
       ]
     },
     invalidExample: {
-      specVersion: "0.1.0",
+      specVersion: "0.2.0",
       profile: {
         id: "example.profile.demo",
         name: "Example RPG",
-        version: "0.1.0",
-        specVersion: "0.1.0",
+        version: "0.2.0",
+        specVersion: "0.2.0",
         extensions: {}
       },
       entities: [],
@@ -346,18 +346,18 @@ const schemaChecks = [
   {
     name: "Profile",
     schemaId:
-      "https://schemas.codryn.com/crgs/v0.1/profile/profile.schema.json",
+      "https://schemas.codryn.com/crgs/v0.2/profile/profile.schema.json",
     validExample: {
       id: "example.profile.demo",
       name: "Example RPG",
-      version: "0.1.0",
-      specVersion: "0.1.0",
+      version: "0.2.0",
+      specVersion: "0.2.0",
       extensions: {
         entityTypes: [
           {
             id: "example.entity.trait",
             schema:
-              "https://schemas.codryn.com/crgs/profiles/example/v0.1/entities/trait.schema.json"
+              "https://schemas.codryn.com/crgs/profiles/example/v0.2/entities/trait.schema.json"
           }
         ]
       }
@@ -365,13 +365,13 @@ const schemaChecks = [
     invalidExample: {
       id: "example.profile.demo",
       name: "Example RPG",
-      version: "0.1.0",
+      version: "0.2.0",
       extensions: {
         relationTypes: [
           {
             id: "grants",
             schema:
-              "https://schemas.codryn.com/crgs/profiles/example/v0.1/relations/grants.schema.json"
+              "https://schemas.codryn.com/crgs/profiles/example/v0.2/relations/grants.schema.json"
           }
         ]
       }
@@ -380,21 +380,21 @@ const schemaChecks = [
   {
     name: "Manifest",
     schemaId:
-      "https://schemas.codryn.com/crgs/v0.1/bundle/manifest.schema.json",
+      "https://schemas.codryn.com/crgs/v0.2/bundle/manifest.schema.json",
     validExample: {
       id: "example-rpg.minimal",
       title: "Example RPG Minimal Bundle",
-      datasetVersion: "0.1.0"
+      datasetVersion: "0.2.0"
     },
     invalidExample: {
       id: "example-rpg.minimal",
-      datasetVersion: "0.1.0"
+      datasetVersion: "0.2.0"
     }
   },
   {
     name: "Relationship",
     schemaId:
-      "https://schemas.codryn.com/crgs/v0.1/relations/relationship.schema.json",
+      "https://schemas.codryn.com/crgs/v0.2/relations/relationship.schema.json",
     validExample: {
       id: "rel.human-grants-adaptable",
       type: "example.relation.grants",
