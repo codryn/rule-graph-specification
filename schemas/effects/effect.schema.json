@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://crgs.dev/schema/effects/effect.schema.json",
+  "$id": "https://schemas.codryn.com/crgs/v0.1/effects/effect.schema.json",
   "title": "Effect",
   "oneOf": [
     {

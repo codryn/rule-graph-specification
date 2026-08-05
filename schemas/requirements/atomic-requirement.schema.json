@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://crgs.dev/schema/requirements/atomic-requirement.schema.json",
+  "$id": "https://schemas.codryn.com/crgs/v0.1/requirements/atomic-requirement.schema.json",
   "title": "AtomicRequirement",
   "description": "Single fact predicate that can test for presence or compare a fact value.",
   "type": "object",

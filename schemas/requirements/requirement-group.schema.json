@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://crgs.dev/schema/requirements/requirement-group.schema.json",
+  "$id": "https://schemas.codryn.com/crgs/v0.1/requirements/requirement-group.schema.json",
   "title": "RequirementGroup",
   "description": "Logical composition of one or more child requirement expressions.",
   "type": "object",
@@ -14,7 +14,7 @@
     "children": {
       "type": "array",
       "items": {
-        "$ref": "https://crgs.dev/schema/requirements/requirement-expression.schema.json"
+        "$ref": "https://schemas.codryn.com/crgs/v0.1/requirements/requirement-expression.schema.json"
       },
       "minItems": 1
     }

@@ -55,6 +55,13 @@ npm run validate
 
 `npm run validate` runs the full local repository check: schema validation, linting, tests, and workspace builds.
 
+## Schema URIs
+
+Core CRGS schemas use the specification-versioned base `https://schemas.codryn.com/crgs/v0.1/...`.
+Profile-owned schemas use a profile-specific base such as `https://schemas.codryn.com/crgs/profiles/example/v0.1/...`.
+
+The full recommended URI layout is documented in `docs/versioning.md`.
+
 ## Status
 
 CRGS is currently at specification version 0.1.0 and should be treated as an initial foundation for iterative refinement toward a stable 1.0 release.

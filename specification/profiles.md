@@ -29,23 +29,23 @@ Bundles declare exactly one root profile. Multiple profiles are combined only by
     "entityTypes": [
       {
         "id": "example.entity.ability",
-        "schema": "https://example.crgs.dev/schema/entities/ability.schema.json"
+        "schema": "https://schemas.codryn.com/crgs/profiles/example/v0.1/entities/ability.schema.json"
       }
     ],
     "requirementTypes": [
       {
         "id": "example.requirement.attribute-rating",
-        "schema": "https://example.crgs.dev/schema/requirements/attribute-rating.schema.json"
+        "schema": "https://schemas.codryn.com/crgs/profiles/example/v0.1/requirements/attribute-rating.schema.json"
       },
       {
         "id": "example.requirement.skill-rating",
-        "schema": "https://example.crgs.dev/schema/requirements/skill-rating.schema.json"
+        "schema": "https://schemas.codryn.com/crgs/profiles/example/v0.1/requirements/skill-rating.schema.json"
       }
     ],
     "relationTypes": [
       {
         "id": "example.relation.unlocks",
-        "schema": "https://example.crgs.dev/schema/relations/unlocks.schema.json"
+        "schema": "https://schemas.codryn.com/crgs/profiles/example/v0.1/relations/unlocks.schema.json"
       }
     ]
   }

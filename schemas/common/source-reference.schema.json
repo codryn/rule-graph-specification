@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://crgs.dev/schema/common/source-reference.schema.json",
+  "$id": "https://schemas.codryn.com/crgs/v0.1/common/source-reference.schema.json",
   "title": "SourceReference",
   "description": "Structured provenance metadata that records the origin of a rule statement or graph element.",
   "type": "object",

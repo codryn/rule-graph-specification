@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://crgs.dev/schema/requirements/requirement-expression.schema.json",
+  "$id": "https://schemas.codryn.com/crgs/v0.1/requirements/requirement-expression.schema.json",
   "title": "RequirementExpression",
   "description": "Declarative predicate tree composed of atomic fact requirements and logical requirement groups.",
   "type": "object",
@@ -8,10 +8,10 @@
   "unevaluatedProperties": false,
   "oneOf": [
     {
-      "$ref": "https://crgs.dev/schema/requirements/atomic-requirement.schema.json"
+      "$ref": "https://schemas.codryn.com/crgs/v0.1/requirements/atomic-requirement.schema.json"
     },
     {
-      "$ref": "https://crgs.dev/schema/requirements/requirement-group.schema.json"
+      "$ref": "https://schemas.codryn.com/crgs/v0.1/requirements/requirement-group.schema.json"
     }
   ],
   "examples": [

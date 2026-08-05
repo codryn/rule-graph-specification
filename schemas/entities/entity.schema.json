@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://crgs.dev/schema/entities/entity.schema.json",
+  "$id": "https://schemas.codryn.com/crgs/v0.1/entities/entity.schema.json",
   "title": "Entity",
   "description": "Typed graph node representing an addressable rule concept such as a trait, capability, or selection.",
   "type": "object",
@@ -14,22 +14,22 @@
       "minLength": 1
     },
     "label": {
-      "$ref": "https://crgs.dev/schema/common/localized-text.schema.json"
+      "$ref": "https://schemas.codryn.com/crgs/v0.1/common/localized-text.schema.json"
     },
     "source": {
-      "$ref": "https://crgs.dev/schema/common/source-reference.schema.json"
+      "$ref": "https://schemas.codryn.com/crgs/v0.1/common/source-reference.schema.json"
     },
     "requirements": {
-      "$ref": "https://crgs.dev/schema/requirements/requirement-expression.schema.json"
+      "$ref": "https://schemas.codryn.com/crgs/v0.1/requirements/requirement-expression.schema.json"
     },
     "effects": {
       "type": "array",
       "items": {
-        "$ref": "https://crgs.dev/schema/effects/effect.schema.json"
+        "$ref": "https://schemas.codryn.com/crgs/v0.1/effects/effect.schema.json"
       }
     },
     "metadata": {
-      "$ref": "https://crgs.dev/schema/common/metadata.schema.json"
+      "$ref": "https://schemas.codryn.com/crgs/v0.1/common/metadata.schema.json"
     }
   },
   "required": ["id", "type", "label"],

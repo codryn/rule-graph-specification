@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://crgs.dev/schema/bundle/manifest.schema.json",
+  "$id": "https://schemas.codryn.com/crgs/v0.1/bundle/manifest.schema.json",
   "title": "Manifest",
   "description": "Dataset identification and versioning metadata for a CRGS bundle.",
   "type": "object",

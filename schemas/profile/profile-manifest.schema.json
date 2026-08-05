@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://crgs.dev/schema/profile/profile-manifest.schema.json",
+  "$id": "https://schemas.codryn.com/crgs/v0.1/profile/profile-manifest.schema.json",
   "title": "ProfileManifest",
   "description": "Profile declaration that registers extension identifiers, their validator schema URIs, and any dependent profiles layered on top of a specific CRGS version.",
   "type": "object",
@@ -28,7 +28,7 @@
     "dependencies": {
       "type": "array",
       "items": {
-        "$ref": "https://crgs.dev/schema/profile/profile-dependency.schema.json"
+        "$ref": "https://schemas.codryn.com/crgs/v0.1/profile/profile-dependency.schema.json"
       },
       "uniqueItems": true
     },
@@ -40,7 +40,7 @@
           "items": {
             "allOf": [
               {
-                "$ref": "https://crgs.dev/schema/profile/extension-registration.schema.json"
+                "$ref": "https://schemas.codryn.com/crgs/v0.1/profile/extension-registration.schema.json"
               },
               {
                 "type": "object",
@@ -60,7 +60,7 @@
           "items": {
             "allOf": [
               {
-                "$ref": "https://crgs.dev/schema/profile/extension-registration.schema.json"
+                "$ref": "https://schemas.codryn.com/crgs/v0.1/profile/extension-registration.schema.json"
               },
               {
                 "type": "object",
@@ -80,7 +80,7 @@
           "items": {
             "allOf": [
               {
-                "$ref": "https://crgs.dev/schema/profile/extension-registration.schema.json"
+                "$ref": "https://schemas.codryn.com/crgs/v0.1/profile/extension-registration.schema.json"
               },
               {
                 "type": "object",
@@ -100,7 +100,7 @@
           "items": {
             "allOf": [
               {
-                "$ref": "https://crgs.dev/schema/profile/extension-registration.schema.json"
+                "$ref": "https://schemas.codryn.com/crgs/v0.1/profile/extension-registration.schema.json"
               },
               {
                 "type": "object",
@@ -133,41 +133,41 @@
         "entityTypes": [
           {
             "id": "example.entity.trait",
-            "schema": "https://example.crgs.dev/schema/entities/trait.schema.json"
+            "schema": "https://schemas.codryn.com/crgs/profiles/example/v0.1/entities/trait.schema.json"
           },
           {
             "id": "example.entity.selection",
-            "schema": "https://example.crgs.dev/schema/entities/selection.schema.json"
+            "schema": "https://schemas.codryn.com/crgs/profiles/example/v0.1/entities/selection.schema.json"
           }
         ],
         "requirementTypes": [
           {
             "id": "example.requirement.attribute-rating",
-            "schema": "https://example.crgs.dev/schema/requirements/attribute-rating.schema.json"
+            "schema": "https://schemas.codryn.com/crgs/profiles/example/v0.1/requirements/attribute-rating.schema.json"
           },
           {
             "id": "example.requirement.skill-rating",
-            "schema": "https://example.crgs.dev/schema/requirements/skill-rating.schema.json"
+            "schema": "https://schemas.codryn.com/crgs/profiles/example/v0.1/requirements/skill-rating.schema.json"
           }
         ],
         "effectTypes": [
           {
             "id": "example.effect.grant",
-            "schema": "https://example.crgs.dev/schema/effects/grant.schema.json"
+            "schema": "https://schemas.codryn.com/crgs/profiles/example/v0.1/effects/grant.schema.json"
           },
           {
             "id": "example.effect.increase",
-            "schema": "https://example.crgs.dev/schema/effects/increase.schema.json"
+            "schema": "https://schemas.codryn.com/crgs/profiles/example/v0.1/effects/increase.schema.json"
           }
         ],
         "relationTypes": [
           {
             "id": "example.relation.grants",
-            "schema": "https://example.crgs.dev/schema/relations/grants.schema.json"
+            "schema": "https://schemas.codryn.com/crgs/profiles/example/v0.1/relations/grants.schema.json"
           },
           {
             "id": "example.relation.depends-on",
-            "schema": "https://example.crgs.dev/schema/relations/depends-on.schema.json"
+            "schema": "https://schemas.codryn.com/crgs/profiles/example/v0.1/relations/depends-on.schema.json"
           }
         ]
       }
