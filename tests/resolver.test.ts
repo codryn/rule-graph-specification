@@ -175,6 +175,23 @@ describe("resolveBundle", () => {
       "/relationships/0/to"
     );
   });
+
+  it("rejects unknown entity requirement targets", () => {
+    const bundle = createBundle();
+    bundle.entities[1] = {
+      ...bundle.entities[1],
+      requirements: {
+        kind: "crgs.requirement.entity",
+        targetId: "feature.unknown"
+      }
+    };
+
+    expectResolverIssue(
+      bundle,
+      "INVALID_REQUIREMENT_TARGET",
+      "/entities/1/requirements/targetId"
+    );
+  });
 });
 
 function expectResolverIssue(

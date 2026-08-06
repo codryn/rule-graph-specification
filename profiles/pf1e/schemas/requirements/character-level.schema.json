@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.codryn.com/crgs/profiles/pf1e/v0.1/requirements/character-level.schema.json",
+  "title": "PF1eCharacterLevelRequirement",
+  "type": "object",
+  "properties": {
+    "kind": {
+      "const": "pf1e.requirement.character-level"
+    },
+    "minimum": {
+      "type": "integer",
+      "minimum": 1
+    }
+  },
+  "required": ["kind", "minimum"],
+  "additionalProperties": false
+}

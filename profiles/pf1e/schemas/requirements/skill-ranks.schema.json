@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.codryn.com/crgs/profiles/pf1e/v0.1/requirements/skill-ranks.schema.json",
+  "title": "PF1eSkillRanksRequirement",
+  "type": "object",
+  "properties": {
+    "kind": {
+      "const": "pf1e.requirement.skill-ranks"
+    },
+    "skillId": {
+      "type": "string",
+      "pattern": "^pf1e\\.skill\\.[a-z0-9-]+$"
+    },
+    "minimum": {
+      "type": "integer",
+      "minimum": 1
+    }
+  },
+  "required": ["kind", "skillId", "minimum"],
+  "additionalProperties": false
+}

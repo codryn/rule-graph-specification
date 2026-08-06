@@ -61,6 +61,7 @@ export interface Entity {
   type: string;
   label: LocalizedText;
   source?: SourceReference;
+  data?: Record<string, unknown>;
   requirements?: RequirementExpression;
   effects?: Effect[];
   metadata?: Metadata;
@@ -163,6 +164,7 @@ export type ResolverIssueCode =
   | "UNKNOWN_REFERENCED_ENTITY"
   | "INVALID_PROFILE_NAMESPACE"
   | "UNSUPPORTED_REQUIREMENT_TYPE"
+  | "INVALID_REQUIREMENT_TARGET"
   | "INVALID_RELATION_TARGET";
 
 export interface ResolverIssue {
@@ -205,6 +207,7 @@ type ExtensionCategory =
 interface RequirementLike {
   kind?: unknown;
   children?: unknown;
+  targetId?: unknown;
 }
 
 export function resolveBundle(bundle: Bundle): ResolvedBundle {
@@ -240,14 +243,6 @@ export function resolveBundle(bundle: Bundle): ResolvedBundle {
     index.outgoingRelations.set(entity.id, []);
     index.incomingRelations.set(entity.id, []);
 
-    validateRequirementExpression(
-      entity.requirements,
-      `/entities/${entityIndex}/requirements`,
-      namespace,
-      bundle.profile,
-      issues
-    );
-
     for (const [effectIndex, effect] of entity.effects?.entries() ?? []) {
       if (!hasProfileNamespace(effect.type, "effect", namespace)) {
         issues.push({
@@ -257,6 +252,17 @@ export function resolveBundle(bundle: Bundle): ResolvedBundle {
         });
       }
     }
+  }
+
+  for (const [entityIndex, entity] of bundle.entities.entries()) {
+    validateRequirementExpression(
+      entity.requirements,
+      `/entities/${entityIndex}/requirements`,
+      namespace,
+      bundle.profile,
+      index,
+      issues
+    );
   }
 
   for (const [relationIndex, relationship] of bundle.relationships.entries()) {
@@ -466,6 +472,7 @@ function validateRequirementExpression(
   path: string,
   namespace: string,
   profile: Profile,
+  index: EntityIndex,
   issues: ResolverIssue[]
 ): void {
   if (!requirement) {
@@ -493,6 +500,7 @@ function validateRequirementExpression(
           `${path}/children/${childIndex}`,
           namespace,
           profile,
+          index,
           issues
         );
       }
@@ -502,6 +510,23 @@ function validateRequirementExpression(
   }
 
   if (kind === entityRequirementKind) {
+    if (typeof requirementLike.targetId !== "string") {
+      issues.push({
+        code: "INVALID_REQUIREMENT_TARGET",
+        path: `${path}/targetId`,
+        message: "Entity requirements must declare a string targetId."
+      });
+      return;
+    }
+
+    if (!index.byId.has(requirementLike.targetId)) {
+      issues.push({
+        code: "INVALID_REQUIREMENT_TARGET",
+        path: `${path}/targetId`,
+        message: `Unknown entity requirement target: ${requirementLike.targetId}`
+      });
+    }
+
     return;
   }
 

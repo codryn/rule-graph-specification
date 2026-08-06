@@ -19,6 +19,11 @@
     "source": {
       "$ref": "https://schemas.codryn.com/crgs/v0.2/common/source-reference.schema.json"
     },
+    "data": {
+      "type": "object",
+      "description": "Profile-specific structured payload validated by the schema registered for the entity type.",
+      "additionalProperties": true
+    },
     "requirements": {
       "$ref": "https://schemas.codryn.com/crgs/v0.2/requirements/requirement-expression.schema.json"
     },
@@ -40,6 +45,9 @@
       "type": "example.entity.trait",
       "label": {
         "default": "Adaptable"
+      },
+      "data": {
+        "tier": "basic"
       },
       "requirements": {
         "kind": "fact",

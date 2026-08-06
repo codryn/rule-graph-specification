@@ -71,6 +71,17 @@ const validations = [
     name: "Example profile demonstration bundle",
     schemaId: "https://schemas.codryn.com/crgs/v0.2/bundle/bundle.schema.json",
     dataPath: join(rootDir, "profiles", "example", "bundle.json")
+  },
+  {
+    name: "PF1e profile",
+    schemaId:
+      "https://schemas.codryn.com/crgs/v0.2/profile/profile.schema.json",
+    dataPath: join(rootDir, "profiles", "pf1e", "profile.json")
+  },
+  {
+    name: "PF1e profile bundle",
+    schemaId: "https://schemas.codryn.com/crgs/v0.2/bundle/bundle.schema.json",
+    dataPath: join(rootDir, "profiles", "pf1e", "bundle.json")
   }
 ];
 

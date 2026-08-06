@@ -26,6 +26,11 @@ import {
   type RuntimeGraph,
   type VirtualThresholdRuntimeNode
 } from "@codryn/crgs-runtime";
+import {
+  getDefaultSchemaRoots,
+  validateBundleDocument,
+  type ValidationIssue
+} from "@codryn/crgs-validator";
 
 export interface CliCommandDescriptor {
   name: string;
@@ -64,9 +69,8 @@ interface AjvLike {
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const repoRoot = resolve(__dirname, "..", "..", "..");
 const schemaDir = join(repoRoot, "schemas");
+const schemaRoots = getDefaultSchemaRoots(repoRoot);
 const packageJsonPath = join(repoRoot, "packages", "crgs-cli", "package.json");
-const bundleSchemaId =
-  "https://schemas.codryn.com/crgs/v0.2/bundle/bundle.schema.json";
 const profileSchemaId =
   "https://schemas.codryn.com/crgs/v0.2/profile/profile.schema.json";
 const Ajv2020 = Ajv2020Module as unknown as new (options: {
@@ -326,14 +330,9 @@ function validateDocument(inputPath: string): CliValidationReport {
 }
 
 function validateBundleOrThrow(bundle: Bundle) {
-  const validator = ajv.getSchema(bundleSchemaId);
-  if (!validator) {
-    throw new Error(`Missing schema validator: ${bundleSchemaId}`);
-  }
-
-  const valid = validator(bundle);
-  if (!valid) {
-    throw new CliCommandError(mapSchemaErrors(validator.errors ?? []));
+  const validation = validateBundleDocument(bundle, { schemaRoots });
+  if (!validation.valid) {
+    throw new CliCommandError(mapValidationIssues(validation.issues));
   }
 
   try {
@@ -414,6 +413,7 @@ function mapResolverIssueCode(code: ResolverIssue["code"]): string {
     case "DUPLICATE_ENTITY_ID":
       return "CRGS_DUPLICATE_ENTITY_ID";
     case "UNKNOWN_REFERENCED_ENTITY":
+    case "INVALID_REQUIREMENT_TARGET":
     case "INVALID_RELATION_TARGET":
       return "CRGS_REFERENCE_NOT_FOUND";
     case "INVALID_PROFILE_NAMESPACE":
@@ -421,6 +421,15 @@ function mapResolverIssueCode(code: ResolverIssue["code"]): string {
     case "UNSUPPORTED_REQUIREMENT_TYPE":
       return "CRGS_UNKNOWN_REQUIREMENT_TYPE";
   }
+}
+
+function mapValidationIssues(issues: ValidationIssue[]): CliValidationIssue[] {
+  return issues.map((issue) => ({
+    code: issue.code,
+    path: issue.path,
+    message: issue.message,
+    keyword: issue.keyword
+  }));
 }
 
 function readStringAtJsonPointer(

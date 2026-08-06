@@ -1,0 +1,81 @@
+{
+  "specVersion": "0.2.0",
+  "manifest": {
+    "id": "pf1e.invalid.unknown-feat-reference",
+    "title": "PF1e Unknown Feat Reference Example",
+    "datasetVersion": "0.1.0"
+  },
+  "profile": {
+    "id": "pf1e.profile.pathfinder-first-edition",
+    "name": "Pathfinder First Edition",
+    "version": "0.1.0",
+    "specVersion": "0.2.0",
+    "extensions": {
+      "entityTypes": [
+        {
+          "id": "pf1e.entity.feat",
+          "schema": "https://schemas.codryn.com/crgs/profiles/pf1e/v0.1/entities/feat.schema.json"
+        },
+        {
+          "id": "pf1e.entity.class",
+          "schema": "https://schemas.codryn.com/crgs/profiles/pf1e/v0.1/entities/class.schema.json"
+        },
+        {
+          "id": "pf1e.entity.skill",
+          "schema": "https://schemas.codryn.com/crgs/profiles/pf1e/v0.1/entities/skill.schema.json"
+        },
+        {
+          "id": "pf1e.entity.source",
+          "schema": "https://schemas.codryn.com/crgs/profiles/pf1e/v0.1/entities/source.schema.json"
+        }
+      ],
+      "requirementTypes": [
+        {
+          "id": "pf1e.requirement.ability-score",
+          "schema": "https://schemas.codryn.com/crgs/profiles/pf1e/v0.1/requirements/ability-score.schema.json"
+        },
+        {
+          "id": "pf1e.requirement.base-attack-bonus",
+          "schema": "https://schemas.codryn.com/crgs/profiles/pf1e/v0.1/requirements/base-attack-bonus.schema.json"
+        },
+        {
+          "id": "pf1e.requirement.character-level",
+          "schema": "https://schemas.codryn.com/crgs/profiles/pf1e/v0.1/requirements/character-level.schema.json"
+        },
+        {
+          "id": "pf1e.requirement.class-level",
+          "schema": "https://schemas.codryn.com/crgs/profiles/pf1e/v0.1/requirements/class-level.schema.json"
+        },
+        {
+          "id": "pf1e.requirement.skill-ranks",
+          "schema": "https://schemas.codryn.com/crgs/profiles/pf1e/v0.1/requirements/skill-ranks.schema.json"
+        },
+        {
+          "id": "pf1e.requirement.feat",
+          "schema": "https://schemas.codryn.com/crgs/profiles/pf1e/v0.1/requirements/feat.schema.json"
+        }
+      ],
+      "effectTypes": [],
+      "relationTypes": []
+    }
+  },
+  "entities": [
+    {
+      "id": "pf1e.feat.orphaned-chain",
+      "type": "pf1e.entity.feat",
+      "label": {
+        "default": "Orphaned Chain"
+      },
+      "data": {
+        "familyId": "orphaned-chain",
+        "featTypes": ["combat"],
+        "repeatable": false
+      },
+      "requirements": {
+        "kind": "crgs.requirement.entity",
+        "targetId": "pf1e.feat.missing-prerequisite"
+      }
+    }
+  ],
+  "relationships": []
+}

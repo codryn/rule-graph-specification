@@ -10,12 +10,17 @@ import {
   type ResolverIssue
 } from "../packages/crgs-core/src/index.js";
 import { buildRuntimeGraph } from "../packages/crgs-runtime/src/index.js";
+import {
+  getDefaultSchemaRoots,
+  validateBundleDocument
+} from "../packages/crgs-validator/src/index.js";
 import { describe, expect, it } from "vitest";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const rootDir = resolve(__dirname, "..");
 const schemaDir = join(rootDir, "schemas");
 const conformanceDir = join(rootDir, "conformance");
+const schemaRoots = getDefaultSchemaRoots(rootDir);
 const bundleSchemaId =
   "https://schemas.codryn.com/crgs/v0.2/bundle/bundle.schema.json";
 
@@ -96,6 +101,23 @@ function runConformance(bundle: Bundle): ConformanceResult {
     return {
       valid: false,
       errors: mapSchemaErrors(validateBundle.errors ?? [])
+    };
+  }
+
+  const profileAwareValidation = validateBundleDocument(bundle, {
+    schemaRoots
+  });
+  const profileAwareErrors = profileAwareValidation.issues.filter(
+    (issue) => issue.code === "CRGS_SCHEMA_VALIDATION_ERROR"
+  );
+  if (profileAwareErrors.length > 0) {
+    return {
+      valid: false,
+      errors: profileAwareErrors.map((issue) => ({
+        code: issue.code,
+        path: issue.path,
+        keyword: issue.keyword
+      }))
     };
   }
 
@@ -204,6 +226,7 @@ function mapResolverIssueCode(code: ResolverIssue["code"]): string {
     case "DUPLICATE_ENTITY_ID":
       return "CRGS_DUPLICATE_ENTITY_ID";
     case "UNKNOWN_REFERENCED_ENTITY":
+    case "INVALID_REQUIREMENT_TARGET":
     case "INVALID_RELATION_TARGET":
       return "CRGS_REFERENCE_NOT_FOUND";
     case "INVALID_PROFILE_NAMESPACE":
