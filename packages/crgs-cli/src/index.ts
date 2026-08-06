@@ -159,17 +159,39 @@ async function runValidateCommand(args: string[]): Promise<number> {
 }
 
 function runRepositoryValidation(): number {
-  const result = spawnSync("npm", ["run", "validate:repo"], {
-    cwd: repoRoot,
-    shell: process.platform === "win32",
-    stdio: "inherit"
-  });
+  const result = runCommand("npm", ["run", "validate:repo"], repoRoot);
 
   if (result.error) {
     throw result.error;
   }
 
   return result.status ?? 1;
+}
+
+function runCommand(command: string, args: string[], cwd: string) {
+  if (process.platform === "win32") {
+    return spawnSync(
+      process.env.ComSpec ?? "cmd.exe",
+      ["/d", "/s", "/c", quoteForCmd([command, ...args])],
+      {
+        cwd,
+        stdio: "inherit"
+      }
+    );
+  }
+
+  return spawnSync(command, args, {
+    cwd,
+    stdio: "inherit"
+  });
+}
+
+function quoteForCmd(parts: string[]): string {
+  return parts
+    .map((part) =>
+      /[\s"&|<>^()]/.test(part) ? `"${part.replace(/(["\\])/g, "\\$1")}"` : part
+    )
+    .join(" ");
 }
 
 async function runBuildCommand(args: string[]): Promise<number> {
