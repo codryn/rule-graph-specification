@@ -28,12 +28,7 @@ const commands = [
 for (const step of commands) {
   console.log(`\n==> ${step.label}`);
 
-  const result = spawnSync(step.command, step.args, {
-    cwd: process.cwd(),
-    shell: process.platform === "win32",
-    stdio: "inherit",
-    encoding: "utf8"
-  });
+  const result = runCommand(step.command, step.args, process.cwd());
 
   if (result.error) {
     throw result.error;
@@ -58,4 +53,32 @@ for (const step of commands) {
 
     process.exit(result.status ?? 1);
   }
+}
+
+function runCommand(command, args, cwd) {
+  if (process.platform === "win32") {
+    return spawnSync(
+      process.env.ComSpec ?? "cmd.exe",
+      ["/d", "/s", "/c", quoteForCmd([command, ...args])],
+      {
+        cwd,
+        stdio: "inherit",
+        encoding: "utf8"
+      }
+    );
+  }
+
+  return spawnSync(command, args, {
+    cwd,
+    stdio: "inherit",
+    encoding: "utf8"
+  });
+}
+
+function quoteForCmd(parts) {
+  return parts
+    .map((part) =>
+      /[\s"&|<>^()]/.test(part) ? `"${part.replace(/(["\\])/g, "\\$1")}"` : part
+    )
+    .join(" ");
 }
