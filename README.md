@@ -76,6 +76,18 @@ The conformance suite also has a dedicated entrypoint:
 npm run test:conformance
 ```
 
+## Reference Viewer
+
+The `@codryn/crgs-viewer` workspace is a client-side reference application for inspecting bundles, generated dependency graphs, nested requirements, validation diagnostics, and subject evaluations. It loads the Example RPG profile automatically and supports local JSON files without uploading them.
+
+Start the viewer from the repository root:
+
+```bash
+npm run dev --workspace @codryn/crgs-viewer
+```
+
+See `packages/crgs-viewer/README.md` for supported inputs, architecture, privacy behavior, and current limitations.
+
 ## CLI
 
 The workspace includes a CRGS CLI package with a `crgs` command.
