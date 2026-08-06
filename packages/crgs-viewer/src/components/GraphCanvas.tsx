@@ -3,8 +3,8 @@ import cytoscape, {
   type ElementDefinition,
   type StylesheetStyle
 } from "cytoscape";
-import elk from "cytoscape-elk";
 import { forwardRef, useEffect, useImperativeHandle, useRef } from "react";
+import elk from "../graph/cytoscape-elk-lite";
 import type { LayoutName, ViewerGraphModel } from "../types";
 
 cytoscape.use(elk);
